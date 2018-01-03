@@ -688,6 +688,7 @@ if (!class_exists('ARM_social_feature')) {
                         'arm_' . $action_type . '_id' => $social_id,
                         'picture' => isset($posted_data['picture']) ? $posted_data['picture'] : '',
                         'user_profile_picture' => isset($posted_data['user_profile_picture']) ? $posted_data['user_profile_picture'] : '',
+                        'arm_social_field_linkedin' => isset($posted_data['arm_social_field_linkedin']) ? $posted_data['arm_social_field_linkedin'] : '',
                         'userId' => isset($posted_data['userId']) ? $posted_data['userId'] : '',
                     );
                     $redirect_to = (isset($posted_data['redirect_to']) && $posted_data['redirect_to'] != '' ) ? $posted_data['redirect_to'] : ARM_HOME_URL;
@@ -725,7 +726,7 @@ if (!class_exists('ARM_social_feature')) {
                     } else {
                         /* Redirect User To Registration Page. */
                         $redirect_opt = $social_settings['registration'];
-
+                        $linkedin_url = $posted_data['arm_social_field_linkedin'];
                         $social_setting_options = isset($social_settings['options']) ? $social_settings['options'] : array();
 
                         if (empty($social_setting_options)) {
@@ -736,7 +737,11 @@ if (!class_exists('ARM_social_feature')) {
                         if ($one_click_signup == 1 && $user_data['user_email'] != '') {
 
                             $reg_form = NULL;
-
+                            
+                            /* Add Social User Info In URL */
+                            $redirect_url = $arm_global_settings->add_query_arg('arm_' . $action_type . '_id', $social_id, $redirect_url);
+                            $redirect_url = $arm_global_settings->add_query_arg('social_form', $social_reg_form, $redirect_url);
+                            $redirect_url = $arm_global_settings->add_query_arg('arm_social_field_linkedin', $linkedin_url, $redirect_url);
                             if (!empty($posted_data['user_profile_picture'])) {
 
                                 if (file_exists(ABSPATH . 'wp-admin/includes/file.php')) {
@@ -808,8 +813,7 @@ if (!class_exists('ARM_social_feature')) {
                         } else {
                             if (!empty($redirect_opt)) {
                                 if (!empty($redirect_opt['form_page'])) {
-                                    $redirect_url = get_permalink($redirect_opt['form_page']);
-                                    $social_reg_form = $redirect_opt['form'];
+                                    $redirect_url = get_permalink($redirect_opt['form_page']);                                    $social_reg_form = $redirect_opt['form'];
                                     $reg_form = new ARM_Form('id', $social_reg_form);
                                     $query_string = "";
                                     if ($reg_form->exists() && !empty($reg_form->fields)) {
@@ -848,6 +852,7 @@ if (!class_exists('ARM_social_feature')) {
                                     /* Add Social User Info In URL */
                                     $redirect_url = $arm_global_settings->add_query_arg('arm_' . $action_type . '_id', $social_id, $redirect_url);
                                     $redirect_url = $arm_global_settings->add_query_arg('social_form', $social_reg_form, $redirect_url);
+                                    $redirect_url = $arm_global_settings->add_query_arg('arm_social_field_linkedin', $linkedin_url, $redirect_url);
 
                                     if (!empty($posted_data['user_profile_picture'])) {
 
@@ -875,6 +880,7 @@ if (!class_exists('ARM_social_feature')) {
                                                 $avtar_url = MEMBERSHIP_UPLOAD_URL . '/arm_' . $action_type . '_' . $random_no . '.jpg';
                                                 $redirect_url = $arm_global_settings->add_query_arg($action_type . '_picture', $avtar_url, $redirect_url);
                                                 $redirect_url = $arm_global_settings->add_query_arg('avatar', $avtar_url, $redirect_url);
+                                                $redirect_url = $arm_global_settings->add_query_arg('arm_social_field_linkedin', $linkedin_url, $redirect_url);
                                             }
                                         }
                                     }

@@ -1783,7 +1783,7 @@ function LinkedInLoginInit() {
             jQuery('.arm_social_login_main_container').fadeOut();
             
             jQuery('.arm_social_linkedin_container').parent('.arm_social_login_main_container').next('.arm_social_connect_loader').show();
-            IN.API.Profile("me").fields("id", "firstName", "lastName", "email-address", "picture-url", "headline").result(LinkedInLoginCallBack);
+            IN.API.Profile("me").fields("id", "firstName", "lastName", "email-address", "picture-urls::(original)", "public-profile-url", "headline").result(LinkedInLoginCallBack);
         });
     }
 }
@@ -1791,6 +1791,7 @@ function LinkedInLoginInit() {
 function LinkedInLoginCallBack(profiles) {
     var member = profiles.values[0];
     var arm_social_login_redirect_to = jQuery('#arm_social_login_redirect_to').val();
+    var i = jQuery("#arm_social_login_form_id").val();
     var user_data = {
         'action': 'arm_social_login_callback',
         'action_type': 'linkedin',
@@ -1799,9 +1800,11 @@ function LinkedInLoginCallBack(profiles) {
         'first_name': member.firstName,
         'last_name': member.lastName,
         'display_name': member.firstName + member.lastName,
-        'picture': member.pictureUrl,
+        'picture': member.pictureUrls["values"][0],
         'redirect_to': arm_social_login_redirect_to,
-        'user_profile_picture': member.pictureUrl,
+        'social_login_form_id': i,
+        'user_profile_picture': member.pictureUrls["values"][0],
+        'arm_social_field_linkedin': member.publicProfileUrl,
     };
     jQuery.ajax({
         type: "POST",
@@ -1811,7 +1814,11 @@ function LinkedInLoginCallBack(profiles) {
         success: function (res) {
             if (res.type == 'redirect')
             {
-                location.href = res.message;
+                var redirURL = res.message;
+                if (window.location.pathname == '/arm_register/'){
+                    redirURL = redirURL.replace("treble-victor-group-member-application-form", "arm_register");
+                }
+                location.href = redirURL + '#registration_form';                
                 return false;
             } else {
                 if (res.status != 'success') {

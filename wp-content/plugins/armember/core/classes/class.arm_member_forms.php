@@ -572,12 +572,12 @@ if (!class_exists('ARM_member_forms')) {
 
             if (!empty($user_data) && (empty($activation_key) || $activation_key == '')) {
 
-            	
+                
                 $err_msg = $arm_global_settings->common_message['arm_already_active_account'];
                 $err_msg = (!empty($err_msg)) ? $err_msg : __('Your account has been activated.', MEMBERSHIP_TXTDOMAIN);
                 $arm_message = array('status' => 'success', 'message' => $err_msg);
             } else if ($activation_key == $key) {
-            	
+                
                 /* Update Activation Status */
                 arm_set_member_status($user_data->ID, 1);
 
@@ -889,7 +889,7 @@ if (!class_exists('ARM_member_forms')) {
                         if ($show_reg_link == '1') {
                             if (isset($form_settings['registration_link_type']) && $form_settings['registration_link_type'] == 'modal') {
                                 $default_rf_id = $this->arm_get_default_form_id('registration');
-			    	            $rf_id = (isset($form_settings['registration_link_type_modal'])) ? $form_settings['registration_link_type_modal'] : $default_rf_id;
+                                $rf_id = (isset($form_settings['registration_link_type_modal'])) ? $form_settings['registration_link_type_modal'] : $default_rf_id;
                                 $regIdClass = 'arm_login_form_reg_link_' . $formRandomID;
                                 $rf_type = (isset($form_settings['registration_link_type_modal_form_type'])) ? $form_settings['registration_link_type_modal_form_type'] : 'arm_form';
                                 if($rf_type == 'arm_setup') {
@@ -2442,6 +2442,11 @@ if (!class_exists('ARM_member_forms')) {
                         } else {
                             $inputPlaceholder = '';
                         }
+                        if (isset($_GET['arm_social_field_linkedin'])){
+                            $spfKeyValue = $_GET['arm_social_field_linkedin'];
+                        } else {
+                            $spfKeyValue = $spfMetaValue;
+                        }
                         if (is_user_logged_in()) {
                             /**
                              * In case of admin edit member page -- `$user_id` will be replaced with requested user id from url.
@@ -2461,7 +2466,7 @@ if (!class_exists('ARM_member_forms')) {
                         $socialFieldsHtml .= '<div class="arm_form_input_container_social_fields arm_form_input_container" id="arm_form_input_container_' . $form_field_id . '">';
                         $socialFieldsHtml .= '<md-input-container class="md-block" flex-gt-sm="">';
                         $socialFieldsHtml .= '<label class="arm_material_label">' . $spfLabel . '</label>';
-                        $socialFieldsHtml .= '<input name="' . $spfMetaKey . '" type="text" value="' . $spfMetaValue . '" class="' . esc_attr($class) . ' arm_form_input_box_' . $spfKey . ' arm_social_field_input" data-ng-model="arm_form.' . esc_attr($spfMetaKey) . '_' . $form_field_id . '" ' . $inputPlaceholder . '>';
+                        $socialFieldsHtml .= '<input name="' . $spfMetaKey . '" type="text" value="' . $spfKeyValue . '" class="' . esc_attr($class) . ' arm_form_input_box_' . $spfKey . ' arm_social_field_input" data-ng-model="arm_form.' . esc_attr($spfMetaKey) . '_' . $form_field_id . '" ' . $inputPlaceholder . '>';
                         $socialFieldsHtml .= '</md-input-container>';
                         $socialFieldsHtml .= '</div>';
                         $socialFieldsHtml .= '</div>';
@@ -3225,7 +3230,7 @@ if (!class_exists('ARM_member_forms')) {
                                         $chked = (strtolower($field_val) == strtolower($key)) ? 'data-ng-init="' . $ngModelCheck . '=\'' . $key . '\'"' : '';
                                     }
                                 }
-				
+                
                                 $field_attr = ' name="' . esc_attr($name) . '" data-ng-model="' . $ngModelCheck . '" ' . $disabled;
                                 if (!empty($required)) {
                                     $field_attr .= ' data-ng-required="'.$arm_field_chkbox_ng_required.'"';
@@ -7260,7 +7265,7 @@ exit;
             if (!empty($form_id) && $form_id == 'close_account') {
                 $arm_default_fields_array = array();
             } else {
-	    
+        
                 /* Query Monitor Change */
                 if( isset($GLOBALS['arm_form_style']) && isset($GLOBALS['arm_form_style'][$arm_new_form_ids])){
                     $arm_form_field_results = $GLOBALS['arm_form_style'][$arm_new_form_ids];
@@ -7456,13 +7461,13 @@ exit;
                     $new_style_css1 = '<link id="google-font-' . $form_id . '" rel="stylesheet" type="text/css" href="#" />';
                 }
                 $new_style_css = "
-						$container .arm_editor_form_fileds_wrapper,
-						$container .arm_form_inner_container{
-						   padding-top: " . $new_style['form_padding_top'] . "px !important;
-						   padding-bottom: " . $new_style['form_padding_bottom'] . "px !important;
-						   padding-right: " . $new_style['form_padding_right'] . "px !important;
-						   padding-left: " . $new_style['form_padding_left'] . "px !important;
-						}
+                        $container .arm_editor_form_fileds_wrapper,
+                        $container .arm_form_inner_container{
+                           padding-top: " . $new_style['form_padding_top'] . "px !important;
+                           padding-bottom: " . $new_style['form_padding_bottom'] . "px !important;
+                           padding-right: " . $new_style['form_padding_right'] . "px !important;
+                           padding-left: " . $new_style['form_padding_left'] . "px !important;
+                        }
                                                 
 
                                                 .arm_popup_member_form_" . $form_id . " .arm_form_message_container{
@@ -7471,45 +7476,45 @@ exit;
                                                     margin: 0 auto;
                                                 }
                                                     
-						.arm_popup_member_form_" . $form_id . " .arm_form_heading_container,
-						$container .arm_form_heading_container,
-	                    $container .arm_form_heading_container .arm_form_field_label_wrapper_text{
-							color: " . $new_style['form_title_font_color'] . ";
-							font-family: " . $new_style['form_title_font_family'] . ", sans-serif, 'Trebuchet MS';
-							font-size: " . $new_style['form_title_font_size'] . "px;
-							" . $new_style['form_title_font_bold'] . $new_style['form_title_font_italic'] . $new_style['form_title_font_decoration'] . "
-						}
-						$container .arm_registration_link,
-						$container .arm_forgotpassword_link{
-							color: " . $new_style['lable_font_color'] . ";
-							font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
-							font-size: " . $new_style['label_font_size'] . "px;
-							" . $new_style['label_font_bold'] . $new_style['label_font_italic'] . $new_style['label_font_decoration'] . "
-						}
-	                    $container .arm_pass_strength_meter{
-	                        color: " . $new_style['lable_font_color'] . ";
-							font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
-	                    }
-	                    $container .arm_registration_link a,
-						$container .arm_forgotpassword_link a{
-							color: " . $new_style['login_link_font_color'] . " !important;
-	                    }
-	                    $container .arm_form_field_container .arm_registration_link,
-	                    $container .arm_form_field_container.arm_registration_link,
-	                    $container .arm_registration_link{
-	                        margin: " . $reg_link_margin['top'] . "px " . $reg_link_margin['right'] . "px " . $reg_link_margin['bottom'] . "px " . $reg_link_margin['left'] . "px !important;
-	                    }
-	                    $container .arm_form_field_container .arm_forgotpassword_link,
-	                    $container .arm_form_field_container.arm_forgotpassword_link,
-	                    $container .arm_forgotpassword_link{
-	                        margin: " . $fp_link_margin['top'] . "px " . $fp_link_margin['right'] . "px " . $fp_link_margin['bottom'] . "px " . $fp_link_margin['left'] . "px !important;                     
-	                    }";
+                        .arm_popup_member_form_" . $form_id . " .arm_form_heading_container,
+                        $container .arm_form_heading_container,
+                        $container .arm_form_heading_container .arm_form_field_label_wrapper_text{
+                            color: " . $new_style['form_title_font_color'] . ";
+                            font-family: " . $new_style['form_title_font_family'] . ", sans-serif, 'Trebuchet MS';
+                            font-size: " . $new_style['form_title_font_size'] . "px;
+                            " . $new_style['form_title_font_bold'] . $new_style['form_title_font_italic'] . $new_style['form_title_font_decoration'] . "
+                        }
+                        $container .arm_registration_link,
+                        $container .arm_forgotpassword_link{
+                            color: " . $new_style['lable_font_color'] . ";
+                            font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
+                            font-size: " . $new_style['label_font_size'] . "px;
+                            " . $new_style['label_font_bold'] . $new_style['label_font_italic'] . $new_style['label_font_decoration'] . "
+                        }
+                        $container .arm_pass_strength_meter{
+                            color: " . $new_style['lable_font_color'] . ";
+                            font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
+                        }
+                        $container .arm_registration_link a,
+                        $container .arm_forgotpassword_link a{
+                            color: " . $new_style['login_link_font_color'] . " !important;
+                        }
+                        $container .arm_form_field_container .arm_registration_link,
+                        $container .arm_form_field_container.arm_registration_link,
+                        $container .arm_registration_link{
+                            margin: " . $reg_link_margin['top'] . "px " . $reg_link_margin['right'] . "px " . $reg_link_margin['bottom'] . "px " . $reg_link_margin['left'] . "px !important;
+                        }
+                        $container .arm_form_field_container .arm_forgotpassword_link,
+                        $container .arm_form_field_container.arm_forgotpassword_link,
+                        $container .arm_forgotpassword_link{
+                            margin: " . $fp_link_margin['top'] . "px " . $fp_link_margin['right'] . "px " . $fp_link_margin['bottom'] . "px " . $fp_link_margin['left'] . "px !important;                     
+                        }";
                 if (!is_admin()) {
                     $new_style_css .= "$container .arm_form_field_container .arm_forgotpassword_link,
-	                    $container .arm_form_field_container.arm_forgotpassword_link,
-	                    $container .arm_forgotpassword_link{
-	                        z-index:2;
-	                    }";
+                        $container .arm_form_field_container.arm_forgotpassword_link,
+                        $container .arm_forgotpassword_link{
+                            z-index:2;
+                        }";
                 }
                 if (is_admin()) {
                     $new_style_css .= ".arm_form_field_container[data-type='select'] .arm_form_input_wrapper{
@@ -7521,90 +7526,90 @@ exit;
                     }";
                 }
                 $new_style_css .= "
-	                    $container .arm_close_account_message,
-						$container .arm_forgot_password_description {
-							color: " . $new_style['lable_font_color'] . ";
-							font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
-							font-size: " . ($new_style['label_font_size'] + 1) . "px;
-						}
-						$container .arm_form_field_container{
-							margin-bottom: " . $new_style['field_spacing'] . "px !important;
-						}
-						$container .arm_form_input_wrapper{
-							max-width: 100%;
-							width: 62%;
-							width: " . $new_style['field_width'] . $new_style['field_width_type'] . ";
-						}
-	                    .arm_form_message_container.arm_editor_form_fileds_container.arm_editor_form_fileds_wrapper,
+                        $container .arm_close_account_message,
+                        $container .arm_forgot_password_description {
+                            color: " . $new_style['lable_font_color'] . ";
+                            font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
+                            font-size: " . ($new_style['label_font_size'] + 1) . "px;
+                        }
+                        $container .arm_form_field_container{
+                            margin-bottom: " . $new_style['field_spacing'] . "px !important;
+                        }
+                        $container .arm_form_input_wrapper{
+                            max-width: 100%;
+                            width: 62%;
+                            width: " . $new_style['field_width'] . $new_style['field_width_type'] . ";
+                        }
+                        .arm_form_message_container.arm_editor_form_fileds_container.arm_editor_form_fileds_wrapper,
                             .arm_form_message_container1.arm_editor_form_fileds_container.arm_editor_form_fileds_wrapper {
-	                        border: none !important;
-	                    } 
-						.arm_module_forms_container $container,
-						.arm_member_form_container $container, .arm_editor_form_fileds_container,.arm_editor_form_fileds_container $container{
-							max-width: 100%;
-							width: " . $new_style['form_width'] . $new_style['form_width_type'] . ";
-							margin: 0 auto;
-						}
+                            border: none !important;
+                        } 
+                        .arm_module_forms_container $container,
+                        .arm_member_form_container $container, .arm_editor_form_fileds_container,.arm_editor_form_fileds_container $container{
+                            max-width: 100%;
+                            width: " . $new_style['form_width'] . $new_style['form_width_type'] . ";
+                            margin: 0 auto;
+                        }
                                                 
                                                 .popup_wrapper.arm_popup_wrapper.arm_popup_member_form" . $popup_container . "{
                                                         background: " . $formBGImage . " " . $formBGColor . "!important;
-							background-repeat: no-repeat;
-							background-position: top left;
-							
+                            background-repeat: no-repeat;
+                            background-position: top left;
+                            
                                                 }
                                                 
                                                 
                                                 
-						.arm_module_forms_container $container,
-						.arm_member_form_container $container, .arm_editor_form_fileds_wrapper{
-							background: " . $formBGImage . " " . $formBGColor . ";
-							background-repeat: no-repeat;
-							background-position: top left;
-							border: " . $new_style['form_border_width'] . "px " . $new_style['form_border_style'] . " " . $new_style['form_border_color'] . ";
-							border-radius: " . $new_style['form_border_radius'] . "px;
-							-webkit-border-radius: " . $new_style['form_border_radius'] . "px;
-							-moz-border-radius: " . $new_style['form_border_radius'] . "px;
-							-o-border-radius: " . $new_style['form_border_radius'] . "px;
-							float: " . $new_style['form_position'] . ";
-						}
+                        .arm_module_forms_container $container,
+                        .arm_member_form_container $container, .arm_editor_form_fileds_wrapper{
+                            background: " . $formBGImage . " " . $formBGColor . ";
+                            background-repeat: no-repeat;
+                            background-position: top left;
+                            border: " . $new_style['form_border_width'] . "px " . $new_style['form_border_style'] . " " . $new_style['form_border_color'] . ";
+                            border-radius: " . $new_style['form_border_radius'] . "px;
+                            -webkit-border-radius: " . $new_style['form_border_radius'] . "px;
+                            -moz-border-radius: " . $new_style['form_border_radius'] . "px;
+                            -o-border-radius: " . $new_style['form_border_radius'] . "px;
+                            float: " . $new_style['form_position'] . ";
+                        }
                                                 
                                                 .popup_wrapper.arm_popup_wrapper.arm_popup_member_form" . $popup_container . " .arm_module_forms_container $container,
-						.popup_wrapper.arm_popup_wrapper.arm_popup_member_form" . $popup_container . " .arm_member_form_container $container{
+                        .popup_wrapper.arm_popup_wrapper.arm_popup_member_form" . $popup_container . " .arm_member_form_container $container{
                                                         background: none !important;
-							
-							
+                            
+                            
                                                 }
                                                 
-	                    .arm_form_msg.arm_member_form_container, .arm_form_msg .arm_form_message_container,
+                        .arm_form_msg.arm_member_form_container, .arm_form_msg .arm_form_message_container,
                             .arm_form_msg.arm_member_form_container, .arm_form_msg .arm_form_message_container1{
-	                        float: " . $new_style['form_position'] . ";
-	                        width: " . $new_style['form_width'] . $new_style['form_width_type'] . ";    
-	                    }
-						$container .arm_form_label_wrapper{
-							max-width: 100%;
-							width: 30%;
-							width: " . $new_style['label_width'] . $new_style['label_width_type'] . ";
-						}
-	                    $container md-input-container.md-input-invalid.md-input-focused label,
-						$container md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused label,
-	                    $container md-input-container.md-default-theme.md-input-invalid.md-input-focused label,
-						$container md-input-container:not(.md-input-invalid).md-input-focused label,
-						$container .arm_form_field_label_text,
-						$container .arm_member_form_field_label .arm_form_field_label_text,
+                            float: " . $new_style['form_position'] . ";
+                            width: " . $new_style['form_width'] . $new_style['form_width_type'] . ";    
+                        }
+                        $container .arm_form_label_wrapper{
+                            max-width: 100%;
+                            width: 30%;
+                            width: " . $new_style['label_width'] . $new_style['label_width_type'] . ";
+                        }
+                        $container md-input-container.md-input-invalid.md-input-focused label,
+                        $container md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused label,
+                        $container md-input-container.md-default-theme.md-input-invalid.md-input-focused label,
+                        $container md-input-container:not(.md-input-invalid).md-input-focused label,
+                        $container .arm_form_field_label_text,
+                        $container .arm_member_form_field_label .arm_form_field_label_text,
                                                 $container .arm_member_form_field_description .arm_form_field_description_text,
-						$container .arm_form_label_wrapper .required_tag,
-						$container .arm_form_input_container label,
+                        $container .arm_form_label_wrapper .required_tag,
+                        $container .arm_form_input_container label,
                         $container md-input-container:not(.md-input-invalid) md-select .md-select-value.md-select-placeholder,
-						$container md-input-container:not(.md-input-invalid).md-input-has-value label
+                        $container md-input-container:not(.md-input-invalid).md-input-has-value label
                                                     {
-							color: " . $new_style['lable_font_color'] . ";
-							font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
-							font-size: " . $new_style['label_font_size'] . "px;
-							cursor: pointer;
-							margin: 0px !important;
+                            color: " . $new_style['lable_font_color'] . ";
+                            font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
+                            font-size: " . $new_style['label_font_size'] . "px;
+                            cursor: pointer;
+                            margin: 0px !important;
                                                         line-height : " . ($new_style['label_font_size'] + 12) . "px;
-							" . $new_style['label_font_bold'] . $new_style['label_font_italic'] . $new_style['label_font_decoration'] . "
-						}
+                            " . $new_style['label_font_bold'] . $new_style['label_font_italic'] . $new_style['label_font_decoration'] . "
+                        }
                                                 $container .arm_member_form_field_description .arm_form_field_description_text
                                                     { 
                                                         font-size: " . $new_style['description_font_size'] . "px; 
@@ -7614,352 +7619,352 @@ exit;
                             background-color : ". $new_style['field_focus_color'] . " ;
                             color : #ffffff;
                         }
-	                    .armSelectOption" . $form_id . "{
-							font-family: " . $new_style['field_font_family'] . ", sans-serif, 'Trebuchet MS';
-							font-size: " . $new_style['label_font_size'] . "px;
-							" . $new_style['field_font_bold'] . $new_style['field_font_italic'] . $new_style['field_font_decoration'] . "
-						}
-						$container .arm_form_input_container.arm_form_input_container_section{
-							color: " . $new_style['lable_font_color'] . ";
-	                        font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
-	                    }
-						$container md-radio-button, $container md-checkbox{
-							color:" . $new_style['lable_font_color'] . ";
-							font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
-							font-size: " . $new_style['label_font_size'] . "px;
-							cursor: pointer;
-							" . $new_style['label_font_bold'] . $new_style['label_font_italic'] . $new_style['label_font_decoration'] . "
-						}
-						md-select-menu.md-default-theme md-option.armSelectOption" . $form_id . "[selected],
-						md-select-menu md-option.armSelectOption" . $form_id . "[selected]{
-							font-weight: bold;
-							color:" . $new_style['field_font_color'] . ";
-						}
-	                    $container .arm_form_input_container input{
-	                        height: " . $new_style['field_height'] . "px;
-	                    }
-	                    $container .arm_apply_coupon_container .arm_coupon_submit_wrapper .arm_apply_coupon_btn{
-	                        min-height: " . ($new_style['field_height'] + 2) . "px;
-	                        margin: 0;
-	                    }
-						$container .arm_form_input_container input,
-						$container .arm_form_input_container textarea,
-						$container .arm_form_input_container select,
-						$container .arm_form_input_container md-select md-select-value{
-	                        background-color: " . $new_style['field_bg_color'] . " !important;
-							border: " . $new_style['field_border_width'] . "px " . $new_style['field_border_style'] . " " . $new_style['field_border_color'] . ";
-							border-color: " . $new_style['field_border_color'] . ";
-							border-radius: " . $new_style['field_border_radius'] . "px !important;
-							-webkit-border-radius: " . $new_style['field_border_radius'] . "px !important;
-							-moz-border-radius: " . $new_style['field_border_radius'] . "px !important;
-							-o-border-radius: " . $new_style['field_border_radius'] . "px !important;
-							color:" . $new_style['field_font_color'] . ";
-							font-family: " . $new_style['field_font_family'] . ", sans-serif, 'Trebuchet MS';
-							font-size: " . $new_style['field_font_size'] . "px;
-							" . $new_style['field_font_bold'] . $new_style['field_font_italic'] . $new_style['field_font_decoration'] . "
-							height: " . $new_style['field_height'] . "px;
-						}
-						$container .armFileUploadWrapper .armFileDragArea{
-							border-color: " . $new_style['field_border_color'] . ";
-						}
-						$container .armFileUploadWrapper .armFileDragArea.arm_dragover{
-							border-color: " . $new_style['field_focus_color'] . ";
-						}
-						$container md-checkbox.md-default-theme.md-checked .md-ink-ripple,
-						$container md-checkbox.md-checked .md-ink-ripple{
-							color: rgba(" . $borderRGB['r'] . ", " . $borderRGB['g'] . ", " . $borderRGB['b'] . ", 0.87);
-						}
-						$container md-radio-button.md-default-theme.md-checked .md-off,
-						$container md-radio-button.md-default-theme .md-off,
-						$container md-radio-button.md-checked .md-off,
-						$container md-radio-button .md-off,
-						$container md-checkbox.md-default-theme .md-icon, 
-						$container md-checkbox .md-icon{
-							border-color: " . $new_style['field_border_color'] . ";
-						}
-						$container md-radio-button.md-default-theme .md-on,
-						$container md-radio-button .md-on,
-						$container md-checkbox.md-default-theme.md-checked .md-icon,
-						$container md-checkbox.md-checked .md-icon{
-							background-color: " . $new_style['field_focus_color'] . ";
-						}
-						md-option.armSelectOption" . $form_id . " .md-ripple.md-ripple-placed,
-						md-option.armSelectOption" . $form_id . " .md-ripple.md-ripple-scaled,
-						$container .md-ripple.md-ripple-placed,
-						$container .md-ripple.md-ripple-scaled{
-							background-color: rgba(" . $borderFocusRGB['r'] . ", " . $borderFocusRGB['g'] . ", " . $borderFocusRGB['b'] . ", 0.87) !important;
-						}
-						$container .md-button .md-ripple.md-ripple-placed,
-						$container .md-button .md-ripple.md-ripple-scaled{
-							background-color: rgb(255, 255, 255) !important;
-						}
-						$container md-checkbox.md-focused:not([disabled]):not(.md-checked) .md-container:before{
-							background-color: rgba(" . $borderFocusRGB['r'] . ", " . $borderFocusRGB['g'] . ", " . $borderFocusRGB['b'] . ", 0.12) !important;
-						}
-						$container md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container:before,
-						$container md-radio-group.md-focused:not(:empty) .md-checked .md-container:before,
-						$container md-checkbox.md-default-theme.md-checked.md-focused .md-container:before,
-						$container md-checkbox.md-checked.md-focused .md-container:before{
-							background-color: rgba(" . $borderFocusRGB['r'] . ", " . $borderFocusRGB['g'] . ", " . $borderFocusRGB['b'] . ", 0.26) !important;
-						}
-						$container.arm_form_layout_writer .arm_form_wrapper_container .select-wrapper input.select-dropdown,
-						$container.arm_form_layout_writer .arm_form_wrapper_container .file-field input.file-path{
-							border-color: " . $new_style['field_border_color'] . ";
-							border-width: 0 0 " . $new_style['field_border_width'] . "px 0 !important;
-						}
-						$container.arm_form_layout_writer .arm_form_input_box.select-wrapper{border:0 !important;}
-						$container .arm_form_input_container input:focus,
-						$container .arm_form_input_container textarea:focus,
-						$container .arm_form_input_container select:focus,
-						$container .arm_form_input_container md-select:focus md-select-value,
-						$container .arm_form_input_container md-select[aria-expanded='true'] + md-select-value{
+                        .armSelectOption" . $form_id . "{
+                            font-family: " . $new_style['field_font_family'] . ", sans-serif, 'Trebuchet MS';
+                            font-size: " . $new_style['label_font_size'] . "px;
+                            " . $new_style['field_font_bold'] . $new_style['field_font_italic'] . $new_style['field_font_decoration'] . "
+                        }
+                        $container .arm_form_input_container.arm_form_input_container_section{
+                            color: " . $new_style['lable_font_color'] . ";
+                            font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
+                        }
+                        $container md-radio-button, $container md-checkbox{
+                            color:" . $new_style['lable_font_color'] . ";
+                            font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
+                            font-size: " . $new_style['label_font_size'] . "px;
+                            cursor: pointer;
+                            " . $new_style['label_font_bold'] . $new_style['label_font_italic'] . $new_style['label_font_decoration'] . "
+                        }
+                        md-select-menu.md-default-theme md-option.armSelectOption" . $form_id . "[selected],
+                        md-select-menu md-option.armSelectOption" . $form_id . "[selected]{
+                            font-weight: bold;
+                            color:" . $new_style['field_font_color'] . ";
+                        }
+                        $container .arm_form_input_container input{
+                            height: " . $new_style['field_height'] . "px;
+                        }
+                        $container .arm_apply_coupon_container .arm_coupon_submit_wrapper .arm_apply_coupon_btn{
+                            min-height: " . ($new_style['field_height'] + 2) . "px;
+                            margin: 0;
+                        }
+                        $container .arm_form_input_container input,
+                        $container .arm_form_input_container textarea,
+                        $container .arm_form_input_container select,
+                        $container .arm_form_input_container md-select md-select-value{
+                            background-color: " . $new_style['field_bg_color'] . " !important;
+                            border: " . $new_style['field_border_width'] . "px " . $new_style['field_border_style'] . " " . $new_style['field_border_color'] . ";
+                            border-color: " . $new_style['field_border_color'] . ";
+                            border-radius: " . $new_style['field_border_radius'] . "px !important;
+                            -webkit-border-radius: " . $new_style['field_border_radius'] . "px !important;
+                            -moz-border-radius: " . $new_style['field_border_radius'] . "px !important;
+                            -o-border-radius: " . $new_style['field_border_radius'] . "px !important;
+                            color:" . $new_style['field_font_color'] . ";
+                            font-family: " . $new_style['field_font_family'] . ", sans-serif, 'Trebuchet MS';
+                            font-size: " . $new_style['field_font_size'] . "px;
+                            " . $new_style['field_font_bold'] . $new_style['field_font_italic'] . $new_style['field_font_decoration'] . "
+                            height: " . $new_style['field_height'] . "px;
+                        }
+                        $container .armFileUploadWrapper .armFileDragArea{
+                            border-color: " . $new_style['field_border_color'] . ";
+                        }
+                        $container .armFileUploadWrapper .armFileDragArea.arm_dragover{
+                            border-color: " . $new_style['field_focus_color'] . ";
+                        }
+                        $container md-checkbox.md-default-theme.md-checked .md-ink-ripple,
+                        $container md-checkbox.md-checked .md-ink-ripple{
+                            color: rgba(" . $borderRGB['r'] . ", " . $borderRGB['g'] . ", " . $borderRGB['b'] . ", 0.87);
+                        }
+                        $container md-radio-button.md-default-theme.md-checked .md-off,
+                        $container md-radio-button.md-default-theme .md-off,
+                        $container md-radio-button.md-checked .md-off,
+                        $container md-radio-button .md-off,
+                        $container md-checkbox.md-default-theme .md-icon, 
+                        $container md-checkbox .md-icon{
+                            border-color: " . $new_style['field_border_color'] . ";
+                        }
+                        $container md-radio-button.md-default-theme .md-on,
+                        $container md-radio-button .md-on,
+                        $container md-checkbox.md-default-theme.md-checked .md-icon,
+                        $container md-checkbox.md-checked .md-icon{
+                            background-color: " . $new_style['field_focus_color'] . ";
+                        }
+                        md-option.armSelectOption" . $form_id . " .md-ripple.md-ripple-placed,
+                        md-option.armSelectOption" . $form_id . " .md-ripple.md-ripple-scaled,
+                        $container .md-ripple.md-ripple-placed,
+                        $container .md-ripple.md-ripple-scaled{
+                            background-color: rgba(" . $borderFocusRGB['r'] . ", " . $borderFocusRGB['g'] . ", " . $borderFocusRGB['b'] . ", 0.87) !important;
+                        }
+                        $container .md-button .md-ripple.md-ripple-placed,
+                        $container .md-button .md-ripple.md-ripple-scaled{
+                            background-color: rgb(255, 255, 255) !important;
+                        }
+                        $container md-checkbox.md-focused:not([disabled]):not(.md-checked) .md-container:before{
+                            background-color: rgba(" . $borderFocusRGB['r'] . ", " . $borderFocusRGB['g'] . ", " . $borderFocusRGB['b'] . ", 0.12) !important;
+                        }
+                        $container md-radio-group.md-default-theme.md-focused:not(:empty) .md-checked .md-container:before,
+                        $container md-radio-group.md-focused:not(:empty) .md-checked .md-container:before,
+                        $container md-checkbox.md-default-theme.md-checked.md-focused .md-container:before,
+                        $container md-checkbox.md-checked.md-focused .md-container:before{
+                            background-color: rgba(" . $borderFocusRGB['r'] . ", " . $borderFocusRGB['g'] . ", " . $borderFocusRGB['b'] . ", 0.26) !important;
+                        }
+                        $container.arm_form_layout_writer .arm_form_wrapper_container .select-wrapper input.select-dropdown,
+                        $container.arm_form_layout_writer .arm_form_wrapper_container .file-field input.file-path{
+                            border-color: " . $new_style['field_border_color'] . ";
+                            border-width: 0 0 " . $new_style['field_border_width'] . "px 0 !important;
+                        }
+                        $container.arm_form_layout_writer .arm_form_input_box.select-wrapper{border:0 !important;}
+                        $container .arm_form_input_container input:focus,
+                        $container .arm_form_input_container textarea:focus,
+                        $container .arm_form_input_container select:focus,
+                        $container .arm_form_input_container md-select:focus md-select-value,
+                        $container .arm_form_input_container md-select[aria-expanded='true'] + md-select-value{
                             color: ". $new_style['field_font_color'] .";
-							border: " . $new_style['field_border_width'] . "px " . $new_style['field_border_style'] . " " . $new_style['field_focus_color'] . ";
-							border-color: " . $new_style['field_focus_color'] . ";
-						}
-						$container .arm_uploaded_file_info .armbar{
-							background-color: " . $new_style['field_focus_color'] . ";
-						}
-						$container .arm_form_input_box.arm_error_msg,
-						$container .arm_form_input_box.arm_invalid,
-						$container .arm_form_input_box.ng-invalid:not(.ng-untouched) md-select-value,
-						$container md-input-container .md-input.ng-invalid:not(.ng-untouched){
-							border: " . $new_style['field_border_width'] . "px " . $new_style['field_border_style'] . " " . $new_style['error_field_border_color'] . ";
-							border-color: " . $new_style['error_field_border_color'] . " !important;
-						}
-						$container .arm_form_message_container .arm_success_msg,
-						$container .arm_form_message_container .arm_error_msg,
+                            border: " . $new_style['field_border_width'] . "px " . $new_style['field_border_style'] . " " . $new_style['field_focus_color'] . ";
+                            border-color: " . $new_style['field_focus_color'] . ";
+                        }
+                        $container .arm_uploaded_file_info .armbar{
+                            background-color: " . $new_style['field_focus_color'] . ";
+                        }
+                        $container .arm_form_input_box.arm_error_msg,
+                        $container .arm_form_input_box.arm_invalid,
+                        $container .arm_form_input_box.ng-invalid:not(.ng-untouched) md-select-value,
+                        $container md-input-container .md-input.ng-invalid:not(.ng-untouched){
+                            border: " . $new_style['field_border_width'] . "px " . $new_style['field_border_style'] . " " . $new_style['error_field_border_color'] . ";
+                            border-color: " . $new_style['error_field_border_color'] . " !important;
+                        }
+                        $container .arm_form_message_container .arm_success_msg,
+                        $container .arm_form_message_container .arm_error_msg,
                                                 $container .arm_form_message_container1 .arm_success_msg,
                                                 $container .arm_form_message_container1 .arm_success_msg1,
-						$container .arm_form_message_container1 .arm_error_msg,
+                        $container .arm_form_message_container1 .arm_error_msg,
                                                     $container .arm_form_message_container .arm_success_msg a{
-							font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
-	                        text-decoration: none !important;
-						}
+                            font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
+                            text-decoration: none !important;
+                        }
                         $container .arm_coupon_field_wrapper .success.notify_msg{
                             font-family: " . $new_style['label_font_family'] . ", sans-serif,'Trebuchet asf';
                             text-decoration: none !important;
                         }
-						$container md-select.md-default-theme.ng-invalid.ng-dirty .md-select-value,
-						$container md-select.ng-invalid.ng-dirty .md-select-value{
-							color: " . $new_style['field_font_color'] . " !important;
-							border-color: " . $new_style['error_field_border_color'] . " !important;
-						}
-	                    $container.arm_form_layout_writer .arm_form_input_container textarea{
-	                        -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-	                        -moz-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-							transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-							background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 99.1%, " . $new_style['field_border_color'] . " 4%);
-							background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 99.1%, " . $new_style['field_border_color'] . " 4%);
-							background-repeat: no-repeat;
-							background-position: 0 0;
-							background-size: 0 100%;
-							max-height:150px;
-	                                        }
-						$container.arm_form_layout_writer .arm_form_input_container input,
-						$container.arm_form_layout_writer .arm_form_input_container select,
-						$container.arm_form_layout_writer .arm_form_input_container md-select md-select-value{
-							-webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-							transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
-							background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, " . $new_style['field_border_color'] . " 4%);
-							background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, " . $new_style['field_border_color'] . " 4%);
-							background-repeat: no-repeat;
-							background-position: 0 0;
-							background-size: 0 100%;
-						}
-						$container.arm_form_layout_writer .arm_form_input_container input:focus,
-						$container.arm_form_layout_writer .arm_form_input_container select:focus,
-						$container.arm_form_layout_writer .arm_form_input_container md-select:focus md-select-value,
-						$container.arm_form_layout_writer .arm_form_input_container md-select[aria-expanded='true'] + md-select-value{
-							background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, " . $new_style['field_focus_color'] . " 4%);
-							background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, " . $new_style['field_focus_color'] . " 4%);
-							background-repeat: no-repeat;
-							background-position: 0 0;
-							background-size: 100% 100%;
-						}
-	                    $container .arm_editor_form_fileds_container .arm_form_input_box.arm_error_msg,
-						$container .arm_editor_form_fileds_container .arm_form_input_box.arm_invalid,
-						$container .arm_editor_form_fileds_container .arm_form_input_box.ng-invalid:not(.ng-untouched) md-select-value,
-						$container .arm_editor_form_fileds_container md-input-container .md-input.ng-invalid:not(.ng-untouched){
-							border: " . $new_style['field_border_width'] . "px " . $new_style['field_border_style'] . " " . $new_style['field_border_color'] . ";
-							border-color: " . $new_style['field_border_color'] . " !important;
-						}
-	                    $container .arm_editor_form_fileds_container .arm_form_input_container input:focus,
-	                    $container .arm_editor_form_fileds_container md-input-container .md-input.ng-invalid:not(.ng-untouched):focus,
-						$container .arm_editor_form_fileds_container .arm_form_input_container textarea:focus,
-						$container .arm_editor_form_fileds_container .arm_form_input_container select:focus,
-						$container .arm_editor_form_fileds_container .arm_form_input_container md-select:focus md-select-value,
-						$container .arm_editor_form_fileds_container .arm_form_input_container md-select[aria-expanded='true'] + md-select-value{
-							border: " . $new_style['field_border_width'] . "px " . $new_style['field_border_style'] . " " . $new_style['field_focus_color'] . ";
-							border-color: " . $new_style['field_focus_color'] . " !important;
-						}
-	                    $container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_box.arm_error_msg:focus,
-						$container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_box.arm_invalid:focus,
-						$container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_box.ng-invalid:not(.ng-untouched):focus md-select-value,
-						$container.arm_form_layout_writer .arm_editor_form_fileds_container md-input-container .md-input.ng-invalid:not(.ng-untouched):focus,
-	                    $container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_container input:focus,
-						$container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_container select:focus,
-						$container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_container md-select:focus md-select-value,
-						$container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_container md-select[aria-expanded='true'] + md-select-value{
-	                        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, " . $new_style['field_focus_color'] . " 4%);
-							background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, " . $new_style['field_focus_color'] . " 4%);
-							background-repeat: no-repeat;
-							background-position: 0 0;
-							background-size: 100% 100%;
-	                        border-color: " . $new_style['field_focus_color'] . " !important;
-	                    }
-	                    $container.arm_form_layout_writer .arm_form_input_container textarea:focus{
-	                        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 99.1%, " . $new_style['field_focus_color'] . " 4%);
-							background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 99.1%, " . $new_style['field_focus_color'] . " 4%);
-							background-repeat: no-repeat;
-							background-position: 0 0;
-							background-size: 100% 100%;
-	                    }
-	                    $container.arm_form_layout_writer textarea.arm_form_input_box.arm_error_msg:focus,
-	                    $container.arm_form_layout_writer textarea.arm_form_input_box.arm_invalid:focus,
-	                    $container.arm_form_layout_writer textarea.arm_form_input_box.ng-invalid:not(.ng-untouched):focus md-select-value,
-	                    $container.arm_form_layout_writer .arm_form_input_container_textarea md-input-container .md-input.ng-invalid:not(.ng-untouched):focus{
-	                        background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 99.1%, " . $new_style['error_field_border_color'] . " 4%);
-	                        background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 99.1%, " . $new_style['error_field_border_color'] . " 4%);
-	                        background-repeat: no-repeat;
-	                        background-position: 0 0;
-	                        background-size: 100% 100%;
-	                    }
-						$container.arm_form_layout_writer .arm_form_input_box.arm_error_msg:focus,
-						$container.arm_form_layout_writer .arm_form_input_box.arm_invalid:focus,
-						$container.arm_form_layout_writer .arm_form_input_box.ng-invalid:not(.ng-untouched):focus md-select-value,
-						$container.arm_form_layout_writer md-input-container .md-input.ng-invalid:not(.ng-untouched):focus{
-							background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, " . $new_style['error_field_border_color'] . " 4%);
-							background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, " . $new_style['error_field_border_color'] . " 4%);
-							background-repeat: no-repeat;
-							background-position: 0 0;
-							background-size: 100% 100%;
-						}
-						$container.arm_form_layout_iconic .arm_error_msg_box .arm_error_msg,
-						$container.arm_form_layout_rounded .arm_error_msg_box .arm_error_msg,
-						$container .arm_error_msg_box .arm_error_msg{
-							color: " . $new_style['error_font_color'] . ";
-							background: " . $new_style['error_field_bg_color'] . ";
-	                        font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
-							font-size: 14px;
-	                        font-size: " . $new_style['label_font_size'] . "px;
-							padding-left: 5px;
-							padding-right: 5px;
-	                        text-decoration: none !important;
-						}
-						$container .arm_msg_pos_right .arm_error_msg_box .arm_error_box_arrow:after{border-right-color: " . $new_style['error_field_bg_color'] . " !important;} 
-						$container .arm_msg_pos_left .arm_error_msg_box .arm_error_box_arrow:after{border-left-color: " . $new_style['error_field_bg_color'] . " !important;}
-						$container .arm_msg_pos_top .arm_error_msg_box .arm_error_box_arrow:after{border-top-color: " . $new_style['error_field_bg_color'] . " !important;}
-						$container .arm_msg_pos_bottom .arm_error_msg_box .arm_error_box_arrow:after{border-bottom-color: " . $new_style['error_field_bg_color'] . " !important;}
-						$container .arm_writer_error_msg_box{
-							color: " . $new_style['error_font_color'] . ";
-							font-size: " . $new_style['field_font_size'] . "px;
-							font-size: 14px;
-						}
-						$container .arm_form_field_submit_button.md-button .md-ripple-container{
-							border-radius: " . $new_style['button_border_radius'] . "px;
-							-webkit-border-radius: " . $new_style['button_border_radius'] . "px;
-							-moz-border-radius: " . $new_style['button_border_radius'] . "px;
-							-o-border-radius: " . $new_style['button_border_radius'] . "px;
-						}
-						$container .arm_form_field_submit_button.md-button,
-						$container .arm_form_field_submit_button{
-							border-radius: " . $new_style['button_border_radius'] . "px;
-							-webkit-border-radius: " . $new_style['button_border_radius'] . "px;
-							-moz-border-radius: " . $new_style['button_border_radius'] . "px;
-							-o-border-radius: " . $new_style['button_border_radius'] . "px;
-							width: auto;
-							max-width: 100%;
-							width: " . $new_style['button_width'] . $new_style['button_width_type'] . ";
-							min-height: 35px;
-							min-height: " . $new_style['button_height'] . $new_style['button_height_type'] . ";
-							padding: 0 10px;
-							font-family: " . $new_style['button_font_family'] . ", sans-serif, 'Trebuchet MS';
-							font-size: " . $new_style['button_font_size'] . "px;
-							margin: " . $new_style['button_margin_top'] . "px " . $new_style['button_margin_right'] . "px " . $new_style['button_margin_bottom'] . "px " . $new_style['button_margin_left'] . "px;
-							" . $new_style['button_font_bold'] . $new_style['button_font_italic'] . $new_style['button_font_decoration'] . "
-							text-transform: none;
-	                        " . $buttonStyle . "
-						}
-	                    .arm_form_field_submit_button.arm_form_field_container_button.arm_editable_input_button{
-	                        height: " . $new_style['button_height'] . $new_style['button_height_type'] . ";
-	                    }
-	                    $container .arm_setup_submit_btn_wrapper .arm_form_field_submit_button.md-button,
-	                    $container .arm_setup_submit_btn_wrapper .arm_form_field_submit_button{
-	                        " . $buttonStyle . "
-	                    }
+                        $container md-select.md-default-theme.ng-invalid.ng-dirty .md-select-value,
+                        $container md-select.ng-invalid.ng-dirty .md-select-value{
+                            color: " . $new_style['field_font_color'] . " !important;
+                            border-color: " . $new_style['error_field_border_color'] . " !important;
+                        }
+                        $container.arm_form_layout_writer .arm_form_input_container textarea{
+                            -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+                            -moz-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+                            transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+                            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 99.1%, " . $new_style['field_border_color'] . " 4%);
+                            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 99.1%, " . $new_style['field_border_color'] . " 4%);
+                            background-repeat: no-repeat;
+                            background-position: 0 0;
+                            background-size: 0 100%;
+                            max-height:150px;
+                                            }
+                        $container.arm_form_layout_writer .arm_form_input_container input,
+                        $container.arm_form_layout_writer .arm_form_input_container select,
+                        $container.arm_form_layout_writer .arm_form_input_container md-select md-select-value{
+                            -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+                            transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+                            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, " . $new_style['field_border_color'] . " 4%);
+                            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, " . $new_style['field_border_color'] . " 4%);
+                            background-repeat: no-repeat;
+                            background-position: 0 0;
+                            background-size: 0 100%;
+                        }
+                        $container.arm_form_layout_writer .arm_form_input_container input:focus,
+                        $container.arm_form_layout_writer .arm_form_input_container select:focus,
+                        $container.arm_form_layout_writer .arm_form_input_container md-select:focus md-select-value,
+                        $container.arm_form_layout_writer .arm_form_input_container md-select[aria-expanded='true'] + md-select-value{
+                            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, " . $new_style['field_focus_color'] . " 4%);
+                            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, " . $new_style['field_focus_color'] . " 4%);
+                            background-repeat: no-repeat;
+                            background-position: 0 0;
+                            background-size: 100% 100%;
+                        }
+                        $container .arm_editor_form_fileds_container .arm_form_input_box.arm_error_msg,
+                        $container .arm_editor_form_fileds_container .arm_form_input_box.arm_invalid,
+                        $container .arm_editor_form_fileds_container .arm_form_input_box.ng-invalid:not(.ng-untouched) md-select-value,
+                        $container .arm_editor_form_fileds_container md-input-container .md-input.ng-invalid:not(.ng-untouched){
+                            border: " . $new_style['field_border_width'] . "px " . $new_style['field_border_style'] . " " . $new_style['field_border_color'] . ";
+                            border-color: " . $new_style['field_border_color'] . " !important;
+                        }
+                        $container .arm_editor_form_fileds_container .arm_form_input_container input:focus,
+                        $container .arm_editor_form_fileds_container md-input-container .md-input.ng-invalid:not(.ng-untouched):focus,
+                        $container .arm_editor_form_fileds_container .arm_form_input_container textarea:focus,
+                        $container .arm_editor_form_fileds_container .arm_form_input_container select:focus,
+                        $container .arm_editor_form_fileds_container .arm_form_input_container md-select:focus md-select-value,
+                        $container .arm_editor_form_fileds_container .arm_form_input_container md-select[aria-expanded='true'] + md-select-value{
+                            border: " . $new_style['field_border_width'] . "px " . $new_style['field_border_style'] . " " . $new_style['field_focus_color'] . ";
+                            border-color: " . $new_style['field_focus_color'] . " !important;
+                        }
+                        $container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_box.arm_error_msg:focus,
+                        $container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_box.arm_invalid:focus,
+                        $container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_box.ng-invalid:not(.ng-untouched):focus md-select-value,
+                        $container.arm_form_layout_writer .arm_editor_form_fileds_container md-input-container .md-input.ng-invalid:not(.ng-untouched):focus,
+                        $container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_container input:focus,
+                        $container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_container select:focus,
+                        $container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_container md-select:focus md-select-value,
+                        $container.arm_form_layout_writer .arm_editor_form_fileds_container .arm_form_input_container md-select[aria-expanded='true'] + md-select-value{
+                            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, " . $new_style['field_focus_color'] . " 4%);
+                            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, " . $new_style['field_focus_color'] . " 4%);
+                            background-repeat: no-repeat;
+                            background-position: 0 0;
+                            background-size: 100% 100%;
+                            border-color: " . $new_style['field_focus_color'] . " !important;
+                        }
+                        $container.arm_form_layout_writer .arm_form_input_container textarea:focus{
+                            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 99.1%, " . $new_style['field_focus_color'] . " 4%);
+                            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 99.1%, " . $new_style['field_focus_color'] . " 4%);
+                            background-repeat: no-repeat;
+                            background-position: 0 0;
+                            background-size: 100% 100%;
+                        }
+                        $container.arm_form_layout_writer textarea.arm_form_input_box.arm_error_msg:focus,
+                        $container.arm_form_layout_writer textarea.arm_form_input_box.arm_invalid:focus,
+                        $container.arm_form_layout_writer textarea.arm_form_input_box.ng-invalid:not(.ng-untouched):focus md-select-value,
+                        $container.arm_form_layout_writer .arm_form_input_container_textarea md-input-container .md-input.ng-invalid:not(.ng-untouched):focus{
+                            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 99.1%, " . $new_style['error_field_border_color'] . " 4%);
+                            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 99.1%, " . $new_style['error_field_border_color'] . " 4%);
+                            background-repeat: no-repeat;
+                            background-position: 0 0;
+                            background-size: 100% 100%;
+                        }
+                        $container.arm_form_layout_writer .arm_form_input_box.arm_error_msg:focus,
+                        $container.arm_form_layout_writer .arm_form_input_box.arm_invalid:focus,
+                        $container.arm_form_layout_writer .arm_form_input_box.ng-invalid:not(.ng-untouched):focus md-select-value,
+                        $container.arm_form_layout_writer md-input-container .md-input.ng-invalid:not(.ng-untouched):focus{
+                            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, " . $new_style['error_field_border_color'] . " 4%);
+                            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, " . $new_style['error_field_border_color'] . " 4%);
+                            background-repeat: no-repeat;
+                            background-position: 0 0;
+                            background-size: 100% 100%;
+                        }
+                        $container.arm_form_layout_iconic .arm_error_msg_box .arm_error_msg,
+                        $container.arm_form_layout_rounded .arm_error_msg_box .arm_error_msg,
+                        $container .arm_error_msg_box .arm_error_msg{
+                            color: " . $new_style['error_font_color'] . ";
+                            background: " . $new_style['error_field_bg_color'] . ";
+                            font-family: " . $new_style['label_font_family'] . ", sans-serif, 'Trebuchet MS';
+                            font-size: 14px;
+                            font-size: " . $new_style['label_font_size'] . "px;
+                            padding-left: 5px;
+                            padding-right: 5px;
+                            text-decoration: none !important;
+                        }
+                        $container .arm_msg_pos_right .arm_error_msg_box .arm_error_box_arrow:after{border-right-color: " . $new_style['error_field_bg_color'] . " !important;} 
+                        $container .arm_msg_pos_left .arm_error_msg_box .arm_error_box_arrow:after{border-left-color: " . $new_style['error_field_bg_color'] . " !important;}
+                        $container .arm_msg_pos_top .arm_error_msg_box .arm_error_box_arrow:after{border-top-color: " . $new_style['error_field_bg_color'] . " !important;}
+                        $container .arm_msg_pos_bottom .arm_error_msg_box .arm_error_box_arrow:after{border-bottom-color: " . $new_style['error_field_bg_color'] . " !important;}
+                        $container .arm_writer_error_msg_box{
+                            color: " . $new_style['error_font_color'] . ";
+                            font-size: " . $new_style['field_font_size'] . "px;
+                            font-size: 14px;
+                        }
+                        $container .arm_form_field_submit_button.md-button .md-ripple-container{
+                            border-radius: " . $new_style['button_border_radius'] . "px;
+                            -webkit-border-radius: " . $new_style['button_border_radius'] . "px;
+                            -moz-border-radius: " . $new_style['button_border_radius'] . "px;
+                            -o-border-radius: " . $new_style['button_border_radius'] . "px;
+                        }
+                        $container .arm_form_field_submit_button.md-button,
+                        $container .arm_form_field_submit_button{
+                            border-radius: " . $new_style['button_border_radius'] . "px;
+                            -webkit-border-radius: " . $new_style['button_border_radius'] . "px;
+                            -moz-border-radius: " . $new_style['button_border_radius'] . "px;
+                            -o-border-radius: " . $new_style['button_border_radius'] . "px;
+                            width: auto;
+                            max-width: 100%;
+                            width: " . $new_style['button_width'] . $new_style['button_width_type'] . ";
+                            min-height: 35px;
+                            min-height: " . $new_style['button_height'] . $new_style['button_height_type'] . ";
+                            padding: 0 10px;
+                            font-family: " . $new_style['button_font_family'] . ", sans-serif, 'Trebuchet MS';
+                            font-size: " . $new_style['button_font_size'] . "px;
+                            margin: " . $new_style['button_margin_top'] . "px " . $new_style['button_margin_right'] . "px " . $new_style['button_margin_bottom'] . "px " . $new_style['button_margin_left'] . "px;
+                            " . $new_style['button_font_bold'] . $new_style['button_font_italic'] . $new_style['button_font_decoration'] . "
+                            text-transform: none;
+                            " . $buttonStyle . "
+                        }
+                        .arm_form_field_submit_button.arm_form_field_container_button.arm_editable_input_button{
+                            height: " . $new_style['button_height'] . $new_style['button_height_type'] . ";
+                        }
+                        $container .arm_setup_submit_btn_wrapper .arm_form_field_submit_button.md-button,
+                        $container .arm_setup_submit_btn_wrapper .arm_form_field_submit_button{
+                            " . $buttonStyle . "
+                        }
                         $container .arm_form_field_submit_button.md-button #arm_form_loader,
-						$container .arm_form_field_submit_button #arm_form_loader{
+                        $container .arm_form_field_submit_button #arm_form_loader{
                             " . $armSpinnerStyle . "
                             }
-						/*$container button:hover,*/
-						$container .arm_form_field_submit_button:hover,
-						$container .arm_form_field_submit_button.md-button:hover,
-						$container .arm_form_field_submit_button.md-button:not([disabled]):hover,
-						$container .arm_form_field_submit_button.md-button.md-default-theme:not([disabled]):hover,
-						$container.arm_form_layout_writer .arm_form_wrapper_container .arm_form_field_submit_button.btn:hover,
-						$container.arm_form_layout_writer .arm_form_wrapper_container .arm_form_field_submit_button.btn-large:hover{
-							" . $buttonHoverStyle . "
-						}
+                        /*$container button:hover,*/
+                        $container .arm_form_field_submit_button:hover,
+                        $container .arm_form_field_submit_button.md-button:hover,
+                        $container .arm_form_field_submit_button.md-button:not([disabled]):hover,
+                        $container .arm_form_field_submit_button.md-button.md-default-theme:not([disabled]):hover,
+                        $container.arm_form_layout_writer .arm_form_wrapper_container .arm_form_field_submit_button.btn:hover,
+                        $container.arm_form_layout_writer .arm_form_wrapper_container .arm_form_field_submit_button.btn-large:hover{
+                            " . $buttonHoverStyle . "
+                        }
                         $container .arm_form_field_submit_button:hover #arm_form_loader,
-						$container .arm_form_field_submit_button.md-button:hover #arm_form_loader,
-						$container .arm_form_field_submit_button.md-button:not([disabled]):hover #arm_form_loader,
-						$container .arm_form_field_submit_button.md-button.md-default-theme:not([disabled]):hover #arm_form_loader,
-						$container.arm_form_layout_writer .arm_form_wrapper_container .arm_form_field_submit_button.btn:hover #arm_form_loader,
-						$container.arm_form_layout_writer .arm_form_wrapper_container .arm_form_field_submit_button.btn-large:hover #arm_form_loader{
+                        $container .arm_form_field_submit_button.md-button:hover #arm_form_loader,
+                        $container .arm_form_field_submit_button.md-button:not([disabled]):hover #arm_form_loader,
+                        $container .arm_form_field_submit_button.md-button.md-default-theme:not([disabled]):hover #arm_form_loader,
+                        $container.arm_form_layout_writer .arm_form_wrapper_container .arm_form_field_submit_button.btn:hover #arm_form_loader,
+                        $container.arm_form_layout_writer .arm_form_wrapper_container .arm_form_field_submit_button.btn-large:hover #arm_form_loader{
                             " . $armSpinnerHoverStyle . "
                         }
-	                    $container .arm_form_wrapper_container .armFileUploadWrapper .armFileBtn,
-						$container .arm_form_wrapper_container .armFileUploadContainer{
-							border: 1px solid " . $new_style['button_back_color'] . ";
-							background-color: " . $new_style['button_back_color'] . ";
-							color: " . $new_style['button_font_color'] . ";
-						}
-						$container .arm_form_wrapper_container .armFileUploadWrapper .armFileBtn:hover,
-						$container .arm_form_wrapper_container .armFileUploadContainer:hover{
-	                        background-color: " . $new_style['button_hover_color'] . " !important;
-							border-color: " . $new_style['button_hover_color'] . " !important;
-							color: " . $new_style['button_hover_font_color'] . " !important;
-	                    }
-						$container .arm_field_fa_icons{color: " . $new_style['prefix_suffix_color'] . ";}
-						.arm_date_field_$form_id .bootstrap-datetimepicker-widget table td.today:before{border: 3px solid " . $date_picker_color . ";}
-						.arm_date_field_$form_id .bootstrap-datetimepicker-widget table td.active,
-						.arm_date_field_$form_id .bootstrap-datetimepicker-widget table td.active:hover{
-							color: " . $date_picker_color . " !important;
-							background: url(" . MEMBERSHIP_IMAGES_URL . "/bootstrap_datepicker_" . $date_picker_color_scheme . ".png) no-repeat !important;
-						}
-						.arm_date_field_$form_id .bootstrap-datetimepicker-widget table td span:hover{border-color: " . $date_picker_color . ";}
-						.arm_date_field_$form_id .bootstrap-datetimepicker-widget table td span.active{background-color: " . $date_picker_color . ";}
-						.arm_date_field_$form_id .arm_cal_header{background-color: " . $date_picker_color . " !important;}
-						.arm_date_field_$form_id .arm_cal_month{
-							background-color: " . $date_picker_color . " !important;
-							border-bottom: 1px solid " . $date_picker_color . ";
-						}
-						.arm_date_field_$form_id .bootstrap-datetimepicker-widget table td.day:hover {
-							background: url(" . MEMBERSHIP_IMAGES_URL . "/bootstrap_datepicker_hover.png) no-repeat;
-						}
-						.arm_date_field_$form_id .arm_cal_hour:hover, .arm_date_field_$form_id .arm_cal_minute:hover{border-color: " . $date_picker_color . ";}
-						.arm_date_field_$form_id .timepicker-picker .btn-primary{
-							background-color: " . $date_picker_color . ";
-							border-color: " . $date_picker_color . ";
-						}
-						.arm_date_field_$form_id .armglyphicon-time:before,
-						.arm_date_field_$form_id .armglyphicon-calendar:before,
-						.arm_date_field_$form_id .armglyphicon-chevron-up:before,
-						.arm_date_field_$form_id .armglyphicon-chevron-down:before{color: " . $date_picker_color . ";}
-						" . stripslashes_deep($form_settings['custom_css']) . "
-					";
+                        $container .arm_form_wrapper_container .armFileUploadWrapper .armFileBtn,
+                        $container .arm_form_wrapper_container .armFileUploadContainer{
+                            border: 1px solid " . $new_style['button_back_color'] . ";
+                            background-color: " . $new_style['button_back_color'] . ";
+                            color: " . $new_style['button_font_color'] . ";
+                        }
+                        $container .arm_form_wrapper_container .armFileUploadWrapper .armFileBtn:hover,
+                        $container .arm_form_wrapper_container .armFileUploadContainer:hover{
+                            background-color: " . $new_style['button_hover_color'] . " !important;
+                            border-color: " . $new_style['button_hover_color'] . " !important;
+                            color: " . $new_style['button_hover_font_color'] . " !important;
+                        }
+                        $container .arm_field_fa_icons{color: " . $new_style['prefix_suffix_color'] . ";}
+                        .arm_date_field_$form_id .bootstrap-datetimepicker-widget table td.today:before{border: 3px solid " . $date_picker_color . ";}
+                        .arm_date_field_$form_id .bootstrap-datetimepicker-widget table td.active,
+                        .arm_date_field_$form_id .bootstrap-datetimepicker-widget table td.active:hover{
+                            color: " . $date_picker_color . " !important;
+                            background: url(" . MEMBERSHIP_IMAGES_URL . "/bootstrap_datepicker_" . $date_picker_color_scheme . ".png) no-repeat !important;
+                        }
+                        .arm_date_field_$form_id .bootstrap-datetimepicker-widget table td span:hover{border-color: " . $date_picker_color . ";}
+                        .arm_date_field_$form_id .bootstrap-datetimepicker-widget table td span.active{background-color: " . $date_picker_color . ";}
+                        .arm_date_field_$form_id .arm_cal_header{background-color: " . $date_picker_color . " !important;}
+                        .arm_date_field_$form_id .arm_cal_month{
+                            background-color: " . $date_picker_color . " !important;
+                            border-bottom: 1px solid " . $date_picker_color . ";
+                        }
+                        .arm_date_field_$form_id .bootstrap-datetimepicker-widget table td.day:hover {
+                            background: url(" . MEMBERSHIP_IMAGES_URL . "/bootstrap_datepicker_hover.png) no-repeat;
+                        }
+                        .arm_date_field_$form_id .arm_cal_hour:hover, .arm_date_field_$form_id .arm_cal_minute:hover{border-color: " . $date_picker_color . ";}
+                        .arm_date_field_$form_id .timepicker-picker .btn-primary{
+                            background-color: " . $date_picker_color . ";
+                            border-color: " . $date_picker_color . ";
+                        }
+                        .arm_date_field_$form_id .armglyphicon-time:before,
+                        .arm_date_field_$form_id .armglyphicon-calendar:before,
+                        .arm_date_field_$form_id .armglyphicon-chevron-up:before,
+                        .arm_date_field_$form_id .armglyphicon-chevron-down:before{color: " . $date_picker_color . ";}
+                        " . stripslashes_deep($form_settings['custom_css']) . "
+                    ";
                     $new_style_css .= $container." stop.arm_social_connect_svg { stop-color:".$new_style['button_back_color']."; } ";
                 if ($isViewProfileLink) {
                     global $arm_global_settings;
                     $frontfontstyle = $arm_global_settings->arm_get_front_font_style();
                     $linkFonts = isset($frontfontstyle['frontOptions']['link_font']) ? $frontfontstyle['frontOptions']['link_font'] : '';
                     $new_style_css .= "
-	                        .arm_shortcode_form .arm_view_profile_link_container a,
-	                        .arm_shortcode_form .arm_view_profile_link_container a.arm_view_profile_link{
-	                            {$linkFonts['font']}
-	                        }
-	                    ";
+                            .arm_shortcode_form .arm_view_profile_link_container a,
+                            .arm_shortcode_form .arm_view_profile_link_container a.arm_view_profile_link{
+                                {$linkFonts['font']}
+                            }
+                        ";
                     if (isset($frontfontstyle['google_font_url']) && !empty($frontfontstyle['google_font_url'])) {
                         $new_style_css1 .= '<link id="google-font-' . $form_id . '" rel="stylesheet" type="text/css" href="' . $frontfontstyle['google_font_url'] . '" />';
                     }
@@ -8758,7 +8763,7 @@ if (!class_exists('ARM_Form')) {
 
         public function get_form_by($field, $value) {
             global $wp, $wpdb, $ARMember;
-	    
+        
             /* Query Monitor Change */
             if( isset($GLOBALS['arm_forms']) && isset($GLOBALS['arm_forms'][$value]) ){
                 $form_data = $GLOBALS['arm_forms'][$value];
@@ -8779,7 +8784,7 @@ if (!class_exists('ARM_Form')) {
             global $wp, $wpdb, $ARMember;
             $fields = array();
             if (!empty($form_id) && $form_id != 0) {
-	    
+        
                 /* Query Monitor Change */
                 if( isset($GLOBALS['arm_form_fields']) && isset($GLOBALS['arm_form_fields'][$form_id]) ){
                     $field_result = $GLOBALS['arm_form_fields'][$form_id];

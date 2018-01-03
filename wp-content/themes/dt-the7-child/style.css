@@ -6,8 +6,163 @@ Description: The7 is perfectly scalable, performance and SEO optimized, responsi
 Version: 1.0.0
 License: This WordPress theme is comprised of two parts: (1) The PHP code and integrated HTML are licensed under the GPL license as is WordPress itself.  You will find a copy of the license text in the same directory as this text file. Or you can read it here: http://wordpress.org/about/gpl/ (2) All other parts of the theme including, but not limited to the CSS code, images, and design are licensed according to the license purchased. Read about licensing details here: http://themeforest.net/licenses/regular_extended
 Template: dt-the7
+
+font: normal bold 16px / 20px "Roboto", Helvetica, Arial, Verdana, sans-serif;
+
 */
 
+.preload-me {
+	width: 50% !important;
+}
+
+.footer-logo-img {
+	width: 35%;
+}
+
+.aio-icon-title {
+	font-family: 'roboto' !important; 
+	font-weight: 800 !important; 
+	font-size: 25px !important; 
+}
+
+.arm_form_106 .arm_form_field_submit_button:hover, .arm_form_106 .arm_form_field_submit_button.md-button:hover, .arm_form_106 .arm_form_field_submit_button.md-button:not([disabled]):hover {
+	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22) !important;
+}
+
+.arm_form_field_submit_button.arm_btn_style_border {
+	background-color: #182b4b !important;
+}
+
+.arm_template_wrapper_directorytemplate3 .arm_user_social_blocks .arm_user_social_fields {
+    float: none;
+    display: inline-block;
+    margin: 0 auto;
+    padding-left:15px;
+}
+
+.arm_template_wrapper_directorytemplate3 .arm_user_link {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    color: #424242 !important;
+    margin: 0px 0 10px !important;
+    text-transform: capitalize;
+    position: relative;
+}
+
+.arm_template_wrapper_directorytemplate3 .arm_user_block {
+    max-width: 270px;
+    width: 30%;
+    border: 1px solid #e0e0e0;
+    min-width: 245px;
+    display: inline-block;
+    position: relative;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -o-border-radius: 8px;
+    vertical-align: top;
+    padding: 20px 20px !important;
+    margin: 0 10px 30px 10px;
+}
+
+.arm_template_wrapper_directorytemplate3 .arm_view_profile_btn_wrapper .arm_view_profile_user_link {
+    float: none;
+    display: inline-block;
+    font-size: 14px;
+    font-weight: Open Sans;
+    border: none;
+    height: 41px !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    padding-top: 3px !important;
+    padding-bottom: 4px !important;
+    margin: 0 auto 20px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -o-border-radius: 4px;
+    -moz-border-radius: 4px;
+    width: auto;
+    cursor: pointer;
+    line-height: 33px;
+}
+
+.arm_template_wrapper.arm_template_wrapper_directorytemplate3 .arm_directory_filters_wrapper {
+    margin-bottom: 30px !important;
+}
+
+#espresso-social-buttons-dv{
+    display: none !important;
+}
+
+.ui-datepicker td span, .ui-datepicker td a {
+    display: block;
+    padding: .3em !important;
+    text-align: right;
+    text-decoration: none;
+}
+
+#page select {
+    font-size: 18px !important;
+    line-height: 28px;
+    height: 32px;
+}
+
+.search-sort{
+    padding-bottom: 0px !important;
+    padding-left: 10px !important;
+    margin-bottom: 0px !important;
+}
+
+.arm_template_wrapper.arm_template_wrapper_directorytemplate3 {
+    padding-top: 0px !important;
+    padding-bottom: 20px !important;
+}
+
+.arm_template_wrapper.arm_template_wrapper_directorytemplate3 .arm_directory_search_wrapper {
+    float: left;
+    min-width: 25% !important;
+    width: auto;
+    padding-left: 10px !important;
+}
+
+.arm_template_wrapper.arm_template_wrapper_directorytemplate3 .arm_directory_filters_wrapper {
+    padding: 0 0px !important;
+}
+
+.arm_directory_list_by_filters {
+    float: left !important;
+}
+
+.questions {
+	margin-top: 20px;
+}
+
+.fortyfour-copyright {
+	margin-top: -15px;
+}
+
+.copyright-div {
+	font-size: 14px;
+	color: white;
+	margin-top: 30px;
+}
+
+.category-filter{
+    float: left !important;
+    display: grid;
+    padding-top: 20px !important;
+}
+
+.espresso_events {
+    margin-bottom: 10px !important;
+}
+
+.view-details-btn{
+    text-align: left !important;
+    float: left !important;
+    margin-top: 20px !important;
+}
 
 .content td {
     padding: 15px 10px 5px 5px !important;
@@ -24,6 +179,15 @@ Template: dt-the7
 
 .arm_membership_setup_form .arm_setup_section_title_wrapper {
     margin: 80px 0 0 !important;
+}
+
+.arm_form_heading_container.arm_add_other_style {
+    border-bottom: 1px solid transparent;
+    padding-bottom: 0px !important; 
+}
+
+.arm_shortcode_form .arm_form_heading_container, .page_title.arm_form_heading_container {
+    min-height: 0px !important; 
 }
 
 .reg-instructions, .linked-container{
@@ -46,7 +210,7 @@ Template: dt-the7
 }
 
 .arm_module_forms_container, .arm_module_box.arm_module_forms_container, .arm_module_box.arm_module_plans_container, .arm_module_box.arm_module_gateways_container{
-    max-width: 500px !important;
+    max-width: 600px !important;
     margin: auto !important;
 }
 
@@ -56,6 +220,10 @@ Template: dt-the7
     line-height: 18px !important;
     color: 616161;
     font-weight: bold !important;
+}
+
+.arm_setup_section_title_wrapper{
+    text-align: center !important;
 }
 
 .payment-section-subheading{
@@ -97,12 +265,6 @@ div.divider {
     display: none !important;
 }
 
-.ui-datepicker {
-    max-width: 400px  !important;
-    min-width: 270px;
-    width: auto;
-}
-
 .foundation-row, .members-about-row{
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
 
@@ -116,6 +278,15 @@ div.divider {
 .col-text-right {
     padding-left: 80px;
 
+}
+
+.mark-bg {
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-image: url(http://3v.fortyfournorth.ca/wp-content/uploads/2017/11/edit_1.jpg) !important;
+    min-height: 520px !important;
+    height: auto !important;
 }
 
 .foundation-bg {
@@ -182,9 +353,9 @@ div.divider {
 .arm_template_wrapper_directorytemplate3 .arm_user_avatar {
     display: inline-block;
     max-width: 100%;
-    width: 150px !important;
+    width: 180px !important;
     height: auto !important;
-    margin: 43px auto 15px auto;
+    margin: 20px auto 15px auto;
     vertical-align: middle;
     position: relative;
     background-color: #FFFFFF;
@@ -220,6 +391,9 @@ div.divider {
     background-color: #ffffff !important; 
 }
 
+.arm_setup_form_container .arm_current_user_plan_info, .arm_setup_summary_text_container .arm_module_box {
+    text-align: center !important;
+}
 
 /*Carosel*/
 
@@ -227,6 +401,11 @@ div.divider {
 	min-height: 520px;
 	margin-top: 80px;
 	padding: 40px;
+}
+
+.standard-row-2{
+    margin-top: 80px;
+    padding: 40px;
 }
 
 .light{
@@ -694,7 +873,8 @@ border-radius: 2px !important;
 }
 
 .arm_user_avatar {
-	margin-top: 25px !important;
+	margin-top: 0px !important;
+    margin-bottom: 5px !important;
 }
 
 .arm_view_profile_btn_wrapper {
@@ -741,7 +921,8 @@ border-radius: 2px !important;
 }
 
 .arm_user_block:hover {
-	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+	  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+      cursor: pointer;
 }
 
 
@@ -786,6 +967,12 @@ border-radius: 2px !important;
 	padding-top: 50px;
 	padding-bottom: 15px;
 	color: white;
+}
+
+.directory-heading{
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
 }
 
 /*.divider {
@@ -895,7 +1082,7 @@ select {
 }
 
 .jst-rght {
-	text-align: right !important; 
+	text-align: center !important; 
 }
 
 .small-text {
@@ -991,7 +1178,14 @@ h3{
 
 
 @media only screen and (min-width:100px) and (max-width: 480px) {
-	.service-heading {
+	
+    .search-sort {
+        padding-bottom: 0px !important;
+        margin-bottom: 0px !important;
+        text-align: center !important;
+    }
+
+    .service-heading {
 		
 		font-size: 45px !important;
 		line-height: 50px !important;
@@ -1094,6 +1288,11 @@ h3{
 .arm_template_wrapper_directorytemplate3 .arm_user_social_blocks .arm_social_prof_div > span {
     margin-top:0!important;
     margin-bottom:0!important;
+}
+
+@media (max-width: 1200px) and (min-width: 769px){}
+.arm_template_wrapper.arm_template_wrapper_directorytemplate3 {
+    padding: 0px 0px !important; 
 }
 
 
