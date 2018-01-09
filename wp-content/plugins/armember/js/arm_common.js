@@ -333,13 +333,13 @@ function armSetupHideShowSections(setupForm)
     var total_cycle = planInput.attr('data-cycle');
     var user_selected_payment_mode = jQuery(setupForm).find('#arm_user_selected_payment_mode_' + selected_plan).val();
     var user_old_plan_ids = jQuery(setupForm).find('#arm_user_old_plan').val();
-  
 
-    
+
+
     if(user_old_plan_ids == undefined){
 
     var user_old_plan = [];
-        
+
     }
     else{
 
@@ -350,8 +350,8 @@ else{
     var user_old_plan = [];
 }
 
-  
-        
+
+
     }
 
 
@@ -395,7 +395,7 @@ else{
 
                 jQuery(setupForm).find('input:radio[name="payment_cycle_' + selected_plan + '"]').filter('[value="' + user_selected_payment_cycle + '"]').attr('checked', 'checked').trigger('change');
             }
-            
+
             jQuery(setupForm).find('.arm_setup_paymentcyclebox_wrapper').slideUp('slow').addClass('arm_hide');
         }
         else
@@ -415,18 +415,18 @@ else{
                     else{
                         jQuery(setupForm).find('input:radio[name="payment_cycle_' + selected_plan + '"]').filter('[value="' + user_selected_payment_cycle + '"]').attr('checked', 'checked').trigger('change');
                     }
-		            
+
 		            jQuery(setupForm).find('.arm_setup_paymentcyclebox_wrapper').slideUp('slow').addClass('arm_hide');
 
 
             	}
             	else{
 
-                   
+
 
             		jQuery(setupForm).find('.arm_module_payment_cycle_container').not('.arm_payment_cycle_box_' + selected_plan).slideUp('slow').addClass('arm_hide');
 	                jQuery(setupForm).find('.arm_payment_cycle_box_' + selected_plan).slideDown('slow').removeClass('arm_hide');
-	               
+
 	                if(total_cycle > 1){
 	                    jQuery(setupForm).find('.arm_setup_paymentcyclebox_wrapper').slideDown('slow').removeClass('arm_hide');
                         jQuery(setupForm).find('.arm_setup_payment_cycle_title_wrapper').slideDown('slow').removeClass('arm_hide');
@@ -435,7 +435,7 @@ else{
 	                     jQuery(setupForm).find('.arm_setup_paymentcyclebox_wrapper').slideUp('slow').addClass('arm_hide');
 	                    jQuery(setupForm).find('.arm_setup_payment_cycle_title_wrapper').slideUp('slow').addClass('arm_hide');
 	                }
-                   
+
                     var selected_cycle = jQuery(setupForm).find('#arm_payment_cycle_plan_' + selected_plan).val();
                     if (plan_skin == 'skin5')
                     {
@@ -476,7 +476,7 @@ else{
         var scope = angular.element('[data-ng-controller=ARMCtrl]').scope();
 
         scope.arm_form.payment_gateway = gateway1;
-       
+
         jQuery(setupForm).find(".arm_module_gateway_input:radio:first").trigger('change');
     }
     armResetCouponCode(setupForm);
@@ -490,11 +490,11 @@ function armSetupHideShowSections1(setupForm, planInput) {
     var total_cycle = planInput.attr('data-cycle');
     var user_selected_payment_mode = jQuery(setupForm).find('#arm_user_selected_payment_mode_' + selected_plan).val();
     var user_old_plan_array = jQuery(setupForm).find('#arm_user_old_plan').val();
-    
+
     if(user_old_plan_array == undefined){
 
     var user_old_plan = [];
-        
+
     }
     else{
     if(user_old_plan_array.search( ',' )){
@@ -526,10 +526,10 @@ function armSetupHideShowSections1(setupForm, planInput) {
     jQuery(setupForm).find('input[name="arm_plan_type"]').val(plan_type).trigger('change');
 
     if (plan_type == 'free') {
-       
+
         jQuery(setupForm).find('.arm_setup_gatewaybox_wrapper').hide('slow');
         jQuery(setupForm).find('.arm_payment_mode_wrapper').hide('slow');
-       
+
         jQuery(setupForm).find('.arm_setup_paymentcyclebox_wrapper').slideUp('slow').addClass('arm_hide');
     } else {
 
@@ -545,7 +545,7 @@ function armSetupHideShowSections1(setupForm, planInput) {
             else{
                 jQuery(setupForm).find('input:radio[name="payment_cycle_' + selected_plan + '"]').filter('[value="' + user_selected_payment_cycle + '"]').attr('checked', 'checked').trigger('change');
             }
-            
+
             jQuery(setupForm).find('.arm_setup_paymentcyclebox_wrapper').slideUp('slow').addClass('arm_hide');
         }
         else
@@ -585,8 +585,8 @@ function armSetupHideShowSections1(setupForm, planInput) {
                         jQuery(setupForm).find('.arm_payment_cycle_box_' + selected_plan).find(".arm_module_cycle_input:radio:[value="+selected_cycle+"]").trigger('change');
                     }
 
-                    
-	                
+
+
             	}
             }
             else
@@ -595,14 +595,14 @@ function armSetupHideShowSections1(setupForm, planInput) {
             }
 
             if (payment_mode == 'both' && plan_type == 'recurring') {
-                
+
                 jQuery(setupForm).find('input:radio[name="arm_selected_payment_mode"]').filter('[value="auto_debit_subscription"]').attr('checked', 'checked').trigger('change');
-                
+
                 jQuery(setupForm).find('.arm_payment_mode_wrapper').show();
             } else {
-                
+
                 jQuery(setupForm).find('input:radio[name="arm_selected_payment_mode"]').filter('[value="' + payment_mode + '"]').attr('checked', 'checked').trigger('change');
-                
+
                 jQuery(setupForm).find('.arm_payment_mode_wrapper').hide();
             }
 
@@ -611,8 +611,8 @@ function armSetupHideShowSections1(setupForm, planInput) {
 
         }
         jQuery(setupForm).find('.arm_setup_gatewaybox_wrapper').show('slow');
-        
-        
+
+
     }
 
     armUpdateOrderAmount1(planInput, setupForm, 0);
@@ -632,12 +632,12 @@ function armUpdateOrderAmount(setupForm, discount, total)
     var selectedPlanSkin = jQuery(setupForm).find('#arm_front_plan_skin_type').val();
 
     if (selectedPlanSkin == 'skin5') {
-       
-        
+
+
         var arm_form_id = setupForm.attr('id');
         var arm_container = jQuery('#'+arm_form_id+' .arm_module_plan_input').attr('aria-owns');
         var planInput = jQuery('#'+arm_container).find('md-option[selected="selected"]');
-        
+
     }
     else
     {
@@ -685,7 +685,7 @@ function armUpdateOrderAmount(setupForm, discount, total)
         arm_selected_payment_mode = jQuery(setupForm).find('[name=arm_selected_payment_mode]:checked').val();
     }
 
-  
+
     if (total <= 0 && arm_selected_payment_mode != 'auto_debit_subscription')
     {
         jQuery(setupForm).find('.arm_module_gateway_fields').slideUp('slow').addClass('arm_hide');
@@ -745,7 +745,7 @@ function armUpdateOrderAmount1(planInput, setupForm, discount, total)
     {
         jQuery(setupForm).find('.arm_module_gateway_fields').hide('slow');
     }
-   
+
 
     jQuery(setupForm).find('.arm_discount_amount_text').text(discount);
     jQuery(setupForm).find('.arm_payable_amount_text').text(total);
@@ -1173,10 +1173,10 @@ jQuery(document).on('change', "input.arm_module_cycle_input", function (e) {
     var selectedPlanSkin = jQuery(setupForm).find('#arm_front_plan_skin_type').val();
 
     if (selectedPlanSkin == 'skin5') {
-        
+
         var container = jQuery(setupForm).find('md-select[name="subscription_plan"]').attr('aria-owns');
         var planInput = jQuery('#'+container).find('md-option[selected="selected"]');
-        
+
         planInput.find('.arm_module_plan_cycle_price').html(plan_amt);
         jQuery(setupForm).find('md-select[name="subscription_plan"]' ).find('.arm_module_plan_cycle_price').html(plan_amt);
     }
@@ -1210,14 +1210,14 @@ jQuery(document).on('change', "input.arm_module_gateway_input", function (e) {
     if (arm_total_payable_amount != '0.00' && arm_total_payable_amount != '0')
     {
         jQuery('#'+arm_form_id+' .arm_module_gateway_fields').not('.arm_module_gateway_fields_' + gateway).slideUp('slow').addClass('arm_hide');
-        
-       
+
+
         jQuery('#'+arm_form_id+' .arm_module_gateway_fields_' + gateway).slideDown('slow').removeClass('arm_hide');
     }
     else if ((arm_total_payable_amount == '0.00' || arm_total_payable_amount == '0') && arm_selected_payment_mode == 'auto_debit_subscription')
     {
         jQuery('#'+arm_form_id+' .arm_module_gateway_fields').not('.arm_module_gateway_fields_' + gateway).slideUp('slow').addClass('arm_hide');
-       
+
         jQuery('#'+arm_form_id+' .arm_module_gateway_fields_' + gateway).slideDown('slow').removeClass('arm_hide');
     }
 
@@ -1242,7 +1242,7 @@ jQuery(document).on('change', "input.arm_module_gateway_input", function (e) {
                         var plan_name_obj = jQuery('#'+arm_container).find('md-option[selected="selected"]');
         var SelectedPlan = plan_name_obj.attr('value');
 
-        
+
 
         var user_selected_payment_mode = jQuery('#'+arm_form_id+' #arm_user_selected_payment_mode_' + SelectedPlan).val();
         var user_old_plan_cycle = jQuery('#'+arm_form_id+' #arm_user_old_plan_total_cycle_' + SelectedPlan).val();
@@ -1263,13 +1263,13 @@ jQuery(document).on('change', "input.arm_module_gateway_input", function (e) {
 
             jQuery('#'+arm_form_id+' .arm_setup_couponbox_wrapper').show('slow');
             if (dataType == 'recurring' && paymentMode == 'both') {
-                
+
                 jQuery('#'+arm_form_id+' input:radio[name="arm_selected_payment_mode"]').filter('[value="auto_debit_subscription"]').attr('checked', 'checked').trigger('change');
-                
+
                 jQuery('#'+arm_form_id+' .arm_payment_mode_wrapper').show('slow');
             } else {
-                
-                
+
+
                 jQuery('#'+arm_form_id+' input:radio[name="arm_selected_payment_mode"]').filter('[value="' + paymentMode + '"]').attr('checked', 'checked').trigger('change');
                 jQuery('#'+arm_form_id+' .arm_payment_mode_wrapper').hide('slow');
             }
@@ -1295,15 +1295,15 @@ jQuery(document).on('change', "input.arm_module_gateway_input", function (e) {
             jQuery('#'+arm_form_id+' .arm_setup_couponbox_wrapper').show('slow');
             if (dataType == 'recurring' && paymentMode == 'both') {
 
-                
+
                 jQuery('#'+arm_form_id+' input:radio[name="arm_selected_payment_mode"]').filter('[value="auto_debit_subscription"]').attr('checked', 'change').trigger('change');
-                
+
                 jQuery('#'+arm_form_id+' .arm_payment_mode_wrapper').show('slow');
             } else {
 
-                
+
                 jQuery('#'+arm_form_id+' input:radio[name="arm_selected_payment_mode"]').filter('[value="' + paymentMode + '"]').attr('checked', 'checked').trigger('change');
-                
+
                 jQuery('#'+arm_form_id+' .arm_payment_mode_wrapper').hide('slow');
             }
         }
@@ -1382,7 +1382,7 @@ function arm_form_ajax_action(form) {
             jQuery(form).find("input[type='submit'], button[type='submit']").attr('disabled', 'disabled').addClass('active');
         },
         success: function (res) {
-            
+
 
             if (res.status == 'success') {
                 if (res.is_action == 'rp')
@@ -1393,25 +1393,25 @@ function arm_form_ajax_action(form) {
                 }
                 else
                 {
-                   
+
                     if(typeof res.script != 'undefined' && res.script !== ''){
                         jQuery('body').append(res.script);
                     }
-                   
+
                     if (res.type != 'redirect') {
                         jQuery(form).parent('.arm_member_form_container').find('.arm_form_message_container').html(res.message).show().delay(5000).fadeOut(2000);
                     }
                     else{
                         window.location.href= res.message;
                     }
-                    
+
                 }
                 if (!jQuery(form).hasClass('arm_form_edit_profile')) {
-                    
+
                     if (typeof armResetFileUploader == "function") {
                         armResetFileUploader(form);
                     }
-                    
+
                 }
 
                 if (!jQuery(form).hasClass('arm_form_edit_profile') && res.type != 'redirect') {
@@ -1429,7 +1429,7 @@ function arm_form_ajax_action(form) {
                 arm_reinit_session_var(form, __ARMAJAXURL, form_key);
             }
             if (res.type != 'redirect') {
-              
+
                 jQuery(window.opera ? 'html' : 'html, body').animate({scrollTop: jQuery(form).parent('.arm_member_form_container').find('.arm_form_message_container').offset().top - 50}, 1000);
                 jQuery(form).parent('.arm_member_form_container').find('.arm_form_message_container').html(res.message).show().delay(5000).fadeOut(2000);
             }
@@ -1461,9 +1461,9 @@ function arm_setup_form_ajax_action(form) {
             var message = res.message;
             if (res.status == 'success') {
 
-                
+
                 if(typeof res.script != 'undefined' && res.script !== ''){
-                    
+
                     jQuery('body').append(res.script);
                 }
 
@@ -1475,7 +1475,7 @@ function arm_setup_form_ajax_action(form) {
                     if (typeof armResetFileUploader == "function") {
                         armResetFileUploader(form);
                     }
-                    
+
                     jQuery(form).find('.arm_module_gateway_input').trigger("change");
                     jQuery(form).find('.arm_module_plan_input').trigger("change");
                 }
@@ -1489,7 +1489,7 @@ function arm_setup_form_ajax_action(form) {
             }
 
             if (res.type != 'redirect') {
-                
+
                 jQuery(window.opera ? 'html' : 'html, body').animate({scrollTop: $formContainer.find('.arm_setup_messages').offset().top - 50}, 1000);
                 $formContainer.find('.arm_setup_messages').html(message).show().delay(5000).fadeOut(2000);
             }
@@ -1548,7 +1548,7 @@ function validateStripePaymentBeforeSubmitForm(form) {
                     var name = email;
                 }
 
-                
+
             }
 
 
@@ -1598,7 +1598,7 @@ jQuery(document).on('click', '.arm_cancel_membership_link', function () {
                 {
                     var content = '<td colspan="' + total_columns + '" class="arm_current_membership_cancelled_row">' + response.msg + '</td>';
                     jQuery('#arm_current_membership_tr_' + plan_id).html(content);
-                    
+
 
                 } else {
                    alert(errorPerformingAction);
@@ -1696,9 +1696,9 @@ function FacebookLoginInit() {
 
                     resApi.userId = uid;
                     jQuery('.arm_social_login_main_container').hide();
-                    
+
                     jQuery('.arm_social_facebook_container').parent('.arm_social_login_main_container').next('.arm_social_connect_loader').show();
-                    
+
                     FacebookLoginCallBack(resApi);
                 });
             } else {
@@ -1781,7 +1781,7 @@ function LinkedInLoginInit() {
         IN.UI.Authorize().place();
         IN.Event.on(IN, "auth", function () {
             jQuery('.arm_social_login_main_container').fadeOut();
-            
+
             jQuery('.arm_social_linkedin_container').parent('.arm_social_login_main_container').next('.arm_social_connect_loader').show();
             IN.API.Profile("me").fields("id", "firstName", "lastName", "email-address", "picture-urls::(original)", "public-profile-url", "headline").result(LinkedInLoginCallBack);
         });
@@ -1812,15 +1812,33 @@ function LinkedInLoginCallBack(profiles) {
         dataType: 'json',
         data: user_data,
         success: function (res) {
-            if (res.type == 'redirect')
-            {
-                var redirURL = res.message;
-                if (window.location.pathname == '/arm_register/'){
-                    redirURL = redirURL.replace("treble-victor-group-member-application-form", "arm_register");
-                }
-                location.href = redirURL + '#registration_form';                
-                return false;
-            } else {
+          if (res.type == 'redirect')
+          {
+              var redirURL = res.message;
+              location.href = redirURL;
+
+              if (window.location.pathname == '/arm_register/' || window.location.pathname == '/treble-victor-group-member-application-form/'){
+                  // Do nothing
+              } else {
+                  //if someone tries to login from any pages other than this and they don't have an account, don't take them to the registration page
+                  location.href = '/login-error/'
+                  return false;
+              }
+
+              if (window.location.pathname == '/arm_register/'){
+                  //this forces the page to stay on arm_register if the user came from arm_register
+                  redirURL = redirURL.replace("treble-victor-group-member-application-form", "arm_register");
+                  location.href = redirURL + '#registration_form';
+                  return false;
+              } else if (redirURL.includes('/treble-victor-group-member-application-form')){
+                  location.href = redirURL + '#registration_form';
+                  return false;
+              }  else {
+                  //
+              }
+
+              return false;
+          } else {
                 if (res.status != 'success') {
                     alert(res.message);
                 }
@@ -1845,7 +1863,7 @@ function GoogleLoginCallBack() {
     if (typeof gapi != 'undefined') {
         gapi.client.load('plus', 'v1').then(function () {
             jQuery('.arm_social_login_main_container').hide();
-            
+
             jQuery('.arm_social_googleplush_container').parent('.arm_social_login_main_container').next('.arm_social_connect_loader').show();
             var request = gapi.client.plus.people.get({
                 'userId': 'me'
@@ -1946,7 +1964,7 @@ function arm_VKAuthCallBack() {
     var user_data = jQuery.parseJSON(jQuery("#arm_vk_user_data").val());
     var arm_social_login_redirect_to = jQuery('#arm_social_login_redirect_to').val();
     jQuery('.arm_social_login_main_container').hide();
-    
+
     jQuery('.arm_social_vk_container').parent('.arm_social_login_main_container').next('.arm_social_connect_loader').show();
     var user_data = {
         'action': 'arm_social_login_callback',
@@ -2209,7 +2227,7 @@ function arm_equal_hight_setup_plan()
             var arm_membership_setup_form = jQuery('.arm_membership_setup_form');
 
             if(arm_membership_setup_form.find('.arm_module_plans_main_container').length > 0) {
-                
+
                 if (arm_membership_setup_form.find('.arm_module_plans_ul li').length > 0) {
                     arm_membership_setup_form.find('.arm_module_plans_ul').each(function () {
                         jQuery(this).find('li').each(function () {
@@ -2244,23 +2262,23 @@ function arm_equal_hight_setup_plan()
                         if (max_height > 0) {
                             jQuery(this).find('li.arm_setup_column_item').each(function () {
                                 jQuery(this).find('.arm_module_plan_option').parent().attr('style', 'height:'+max_height+'px !important;');
-                                
+
                                 jQuery(this).find('.arm_module_plan_option').attr('style', 'height:'+max_height+'px !important;');
                             });
                         }
                     });
                 }
-                
+
             }
 
             if(arm_membership_setup_form.find('.arm_setup_paymentcyclebox_main_wrapper').length > 0) {
-                
+
                 if(arm_membership_setup_form.find('.arm_setup_paymentcyclebox_wrapper .arm_module_payment_cycle_container').length > 0)
                 {
-                    
-                   
+
+
                     jQuery('.arm_membership_setup_form').find('.arm_module_payment_cycle_container').each(function () {
-                        
+
                         if (jQuery('.arm_membership_setup_form').find('.arm_module_payment_cycle_ul li').length > 0) {
 
                             jQuery('.arm_membership_setup_form').find('.arm_module_payment_cycle_ul').each(function () {
@@ -2297,22 +2315,22 @@ function arm_equal_hight_setup_plan()
                                 if (max_height > 0) {
                                     jQuery(this).find('li.arm_setup_column_item').each(function () {
                                         jQuery(this).find('.arm_module_payment_cycle_option').parent().attr('style', 'height:'+max_height+'px !important;');
-                                        
+
                                         jQuery(this).find('.arm_module_payment_cycle_option').attr('style', 'height:'+max_height+'px !important;');
                                     });
                                 }
                             });
                         }
-                        
+
                     });
 
-                    
+
                 }
-                
+
             }
 
             if(arm_membership_setup_form.find('.arm_setup_gatewaybox_main_wrapper').length > 0) {
-                
+
 
                 if (arm_membership_setup_form.find('.arm_module_gateways_ul li').length > 0) {
 
@@ -2349,7 +2367,7 @@ function arm_equal_hight_setup_plan()
                         if (max_height > 0) {
                             jQuery(this).find('li.arm_setup_column_item').each(function () {
                                 jQuery(this).find('.arm_module_gateway_option').parent().attr('style', 'height:'+max_height+'px !important;');
-                                
+
                                 jQuery(this).find('.arm_module_gateway_option').attr('style', 'height:'+max_height+'px !important;');
                             });
                         }
@@ -2633,7 +2651,7 @@ jQuery(document).on('change', '.arm_selected_payment_mode', function () {
     {
         var form = jQuery(this).parents('form:first');
 
-       
+
         var arm_form_id = '#'+form.attr('id')+' ';
         var arm_total_payable_amount = jQuery(form).find('#arm_total_payable_amount').val();
 
@@ -2650,19 +2668,19 @@ jQuery(document).on('change', '.arm_selected_payment_mode', function () {
         {
             var gateway = jQuery(form).find('input[name=payment_gateway]:checked').attr('value');
             jQuery(form).find('.arm_module_gateway_fields').not('.arm_module_gateway_fields_' + gateway).slideUp('slow').addClass('arm_hide');
-           
+
             jQuery(arm_form_id+'.arm_module_gateway_fields_' + gateway).slideDown('slow').removeClass('arm_hide');
         }
         else
         {
-           
+
 
             var gateway_container = jQuery(form).find('.arm_module_gateway_input').attr('aria-owns');
             var gateway_obj = jQuery('#'+gateway_container).find('md-option:selected');
             var gateway = gateway_obj.attr('value');
 
             jQuery(arm_form_id+'.arm_module_gateway_fields').not('.arm_module_gateway_fields_' + gateway).slideUp('slow').addClass('arm_hide');
-           
+
             jQuery(arm_form_id+'.arm_module_gateway_fields_' + gateway).slideDown('slow').removeClass('arm_hide');
         }
 
@@ -2699,7 +2717,7 @@ jQuery(document).on('click', '.arm_renew_subscription_button', function () {
     var loader_img = jQuery(this).closest('form').find('#loader_img').val();
     var setup_id = jQuery(this).closest('form').find('#setup_id').val();
     var from_style_css = jQuery(this).closest('form').find('#arm_form_style_css').val();
-  
+
     var arm_font_awsome = jQuery(this).closest('form').find('#arm_font_awsome').val();
     var stripe_js = jQuery(this).closest('form').find('#arm_stripe_js').val();
     jQuery('.arm_current_membership_container').html('');
@@ -2718,7 +2736,7 @@ jQuery(document).on('click', '.arm_renew_subscription_button', function () {
             var spt = script.length, lnk = link.length, from_style_css_loaded = false, arm_font_awsome_loaded = false, stripe_js_loaded = false;
 
             while (spt--) {
-               
+
                 if (typeof script[spt].src != 'undefined' && script[spt].src == stripe_js) {
                     stripe_js_loaded = true;
                 }
@@ -2752,7 +2770,7 @@ jQuery(document).on('click', '.arm_renew_subscription_button', function () {
 
                 if (Stripe != undefined) {
 
-                  
+
                     jQuery('.arm_current_membership_container').html(res);
                     arm_do_bootstrap_angular();
                     var interval = setInterval(function () {
@@ -2860,13 +2878,13 @@ jQuery(document).on('click', '#arm_setup_two_step_next', function(){
     obj.find('.arm_payment_mode_main_wrapper').removeClass('arm_hide');
     obj.find('.arm_setup_couponbox_main_wrapper').removeClass('arm_hide');
     obj.find('.arm_setup_summary_text_main_container').removeClass('arm_hide');
-    obj.find('.arm_setup_summary_text_container').removeClass('arm_hide');   
+    obj.find('.arm_setup_summary_text_container').removeClass('arm_hide');
     obj.find('.arm_setup_submit_btn_main_wrapper').removeClass('arm_hide');
-    obj.find('.arm_setup_paymentcyclebox_main_wrapper').slideUp();  
+    obj.find('.arm_setup_paymentcyclebox_main_wrapper').slideUp();
     obj.find('.arm_module_plans_main_container').slideUp();
     obj.find('.arm_setup_two_step_next_wrapper').slideUp();
     obj.find('.arm_setup_two_step_previous_wrapper').slideDown();
-    
+
     arm_set_plan_height(obj);
 
 });
@@ -2920,9 +2938,9 @@ jQuery(document).on('click', '#arm_setup_two_step_previous', function(){
     obj.find('.arm_payment_mode_main_wrapper').addClass('arm_hide');
     obj.find('.arm_setup_couponbox_main_wrapper').addClass('arm_hide');
     obj.find('.arm_setup_summary_text_main_container').removeClass('arm_hide');
-    obj.find('.arm_setup_summary_text_container').addClass('arm_hide');   
+    obj.find('.arm_setup_summary_text_container').addClass('arm_hide');
     obj.find('.arm_setup_submit_btn_main_wrapper').addClass('arm_hide');
-    obj.find('.arm_setup_paymentcyclebox_main_wrapper').slideDown();  
+    obj.find('.arm_setup_paymentcyclebox_main_wrapper').slideDown();
     obj.find('.arm_module_plans_main_container').slideDown();
     obj.find('.arm_setup_two_step_next_wrapper').slideDown();
     obj.find('.arm_setup_two_step_previous_wrapper').slideUp();
