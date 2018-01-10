@@ -1820,9 +1820,11 @@ function LinkedInLoginCallBack(profiles) {
               if (window.location.pathname == '/arm_register/' || window.location.pathname == '/treble-victor-group-member-application-form/'){
                   // Do nothing
               } else {
-                  //if someone tries to login from any pages other than this and they don't have an account, don't take them to the registration page
-                  location.href = '/login-error/'
-                  return false;
+                if (redirURL.includes('/treble-victor-group-member-application-form')){
+                       //if someone tries to login from any pages other than this and they don't have an account, don't take them to the registration page
+                       location.href = '/login-error/'
+                       return false;
+                   }
               }
 
               if (window.location.pathname == '/arm_register/'){
